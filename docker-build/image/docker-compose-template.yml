@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240124.021044
+    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240124.022158
     tty: true
     ports:
       - "8080:8080"

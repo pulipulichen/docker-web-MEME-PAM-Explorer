@@ -4,8 +4,24 @@
 # specify base docker image
 FROM node:20.2.0-bullseye
 
-ADD package.json /app/
-ADD docker-build/derby/server.js /app/
+# =================================================================
+
+# For docker web
+ENV LOCAL_PORT=8080
+ENV RUN_COMMAND="/usr/local/bin/node /app/server.js"
+ENV HOMEPAGE_URI=/
+COPY ./docker-build/docker-web/startup.sh /startup.sh
+CMD ["bash", "/startup.sh"]
+
+# =================================================================
+
+COPY package.json /app/
+WORKDIR /app/
+RUN npm_config_spin=false npm_config_loglevel=warn npm install --production
+
+# =================================================================
+
+COPY docker-build/derby/server.js /app/
 
 # 8001
 # EXPOSE 8080
@@ -47,10 +63,6 @@ ADD docker-build/derby/server.js /app/
 # EXPOSE 8009
 # ADD app/render /var/derby-examples/render
 
-# npm install all the things
-WORKDIR /app/
-RUN npm_config_spin=false npm_config_loglevel=warn npm install --production
-
 # expose any ports we need
 
 # EXPOSE 8002
@@ -62,4 +74,4 @@ RUN npm_config_spin=false npm_config_loglevel=warn npm install --production
 # EXPOSE 8008
 # EXPOSE 8009
 # the command that gets run inside the docker container
-CMD ["/usr/local/bin/node", "/app/server.js"]
+# CMD ["/usr/local/bin/node", "/app/server.js"]
