@@ -1,19 +1,19 @@
 {
-  "name": "docker-web-Apache-Solr",
+  "name": "docker-web-MEME-PAM-Explorer",
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "docker-compose up --build",
-    "reset-start": "rm -rf ./docker-web-Apache-Solr; docker-compose up --build",
+    "commit-docker-image": "docker-compose build; bash ./docker-build/image/commit-docker-image.sh",
+    "reset-start": "rm -rf ./docker-web-MEME-PAM-Explorer; docker-compose up --build",
     "d0.build": "docker-compose build",
     "d1.bash": "docker-compose run --service-ports app bash /console.sh",
-    "save-conf": "bash ./docker-build/save-conf.sh",
-    "commit-docker-image": "docker-compose build; bash ./docker-build/image/commit-docker-image.sh"
+    "save-conf": "bash ./docker-build/save-conf.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://pulipuli.chen@gmail.com@github.com/pulipulichen/docker-web-Apache-Solr.git"
+    "url": "git+https://pulipuli.chen@gmail.com@github.com/pulipulichen/docker-web-MEME-PAM-Explorer.git"
   },
   "keywords": [
     "PWA"
@@ -21,7 +21,23 @@
   "author": "Pulipuli Chen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pulipulichen/docker-web-Apache-Solr/issues"
+    "url": "https://github.com/pulipulichen/docker-web-MEME-PAM-Explorer/issues"
   },
-  "homepage": "https://github.com/pulipulichen/docker-web-Apache-Solr#readme"
+  "homepage": "https://github.com/pulipulichen/docker-web-MEME-PAM-Explorer#readme",
+  "dependencies": {
+    "coffeescript": "^1.12.7",
+    "d-barchart": "^0.1.0",
+    "d-barchart-vanilla": "^0.1.0",
+    "d-before-unload": "^0.1.0",
+    "d-bootstrap": "^0.1.0",
+    "d-codemirror": "git://github.com/derbyjs/d-codemirror#v0.2.9",
+    "d-connection-alert": "^0.1.0",
+    "d-d3-barchart": "^0.1.0",
+    "derby": "^0.10.22",
+    "derby-debug": "^0.1.0",
+    "derby-starter": "^0.4.8",
+    "derby-stylus": "^0.3.0",
+    "express": "^4.13.4",
+    "showdown": "^1.8.6"
+  }
 }

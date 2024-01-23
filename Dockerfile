@@ -1,45 +1,65 @@
-FROM solr:8.7.0
+# BUILD-USING: docker build -t derbyjs/derby-examples .
+# RUN-USING: docker run --name derby-examples --rm derbyjs/derby-examples
 
-USER root
+# specify base docker image
+FROM node:20.2.0-bullseye
 
-RUN apt-get update
-RUN apt-get install -y curl wget nano rsync mlocate vim
-RUN updatedb
-RUN apt-get install -y pip
-RUN pip install pyexcel==0.7.0 pyexcel-ods==0.6.0 pandas==2.1.2 requests==2.31.0
+ADD package.json /app/
+ADD docker-build/derby/server.js /app/
 
-#RUN sed -i '/jessie-updates/d' /etc/apt/sources.list
+# 8001
+# EXPOSE 8080
+# ADD app/main /var/derby-examples/main
 
-# RUN apt-get update
-# RUN apt-get install -y wget nano curl wget rsync
+# 8001
+# EXPOSE 8001
+# ADD app/charts /var/derby-examples/charts
 
-#RUN mkdir -p /docker-build/
-#RUN chown solr:solr -R /docker-build/
+# 8002
+# EXPOSE 8002
+# ADD app/chat /var/derby-examples/chat
 
-ENV LOCAL_VOLUMN_PATH=/var/solr/data/collection/conf/
-#ENV SHARED_PATH=/opt/solr-9.4.0/
-ENV LOCAL_PORT=8983
+# # 8003
+# EXPOSE 8003
+# ADD app/codemirror /var/derby-examples/codemirror
 
-#RUN mv /opt/solr-9.4.0 /opt/solr-9.4.0-original
-#RUN chown solr:solr -R /opt/solr-9.4.0-original
+# # 8004
+# EXPOSE 8004
+# ADD app/directory /var/derby-examples/directory
 
-#RUN mkdir -p /opt/solr-9.4.0
-#RUN chown solr:solr -R /opt/solr-9.4.0
+# # 8005
+# EXPOSE 8005
+# ADD app/hello /var/derby-examples/hello
 
-ENTRYPOINT []
-CMD ["bash", "/startup.sh"]
+# # 8006
+# EXPOSE 8006
+# ADD app/sink /var/derby-examples/sink
 
-#USER solr
+# # 8007
+# EXPOSE 8007
+# ADD app/todos /var/derby-examples/todos
 
-RUN mkdir -p /var/solr/data/collection/conf
-RUN echo "name=collection" > /var/solr/data/collection/core.properties
-RUN mkdir -p /docker-build/conf
-COPY ./docker-build/jetty.xml /opt/solr-8.7.0/server/etc/jetty.xml
-COPY ./docker-build/conf /docker-build/conf
-COPY ./docker-build/python /docker-build/python
-RUN chmod -R 777 "/docker-build/conf/"
-COPY ./docker-build/console.sh /console.sh
-COPY ./docker-build/startup.sh /startup.sh
+# # 8008
+# EXPOSE 8008
+# ADD app/widgets /var/derby-examples/widgets
 
-# CMD ["solr-foreground", "-force"]
-# RUN echo "20231101-0056"
+# # 8009
+# EXPOSE 8009
+# ADD app/render /var/derby-examples/render
+
+# npm install all the things
+WORKDIR /app/
+RUN npm_config_spin=false npm_config_loglevel=warn npm install --production
+
+# expose any ports we need
+
+# EXPOSE 8002
+# EXPOSE 8003
+# EXPOSE 8004
+# EXPOSE 8005
+# EXPOSE 8006
+# EXPOSE 8007
+# EXPOSE 8008
+# EXPOSE 8009
+# the command that gets run inside the docker container
+CMD ["/usr/local/bin/node", "/app/server.js"]

@@ -4,7 +4,23 @@ services:
     build: .
     tty: true
     #user: solr
-    ports:
-      - "8983:8983"
+    ports: # external:internal
+      - "8080:8080"
+    networks:
+      - my_network
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      MONGO_HOST: db
     volumes: 
-      - "./docker-web-Apache-Solr:/var/solr/data/collection/conf"
+      - "./app:/app/app"
+  db:
+    image: mongo:6.0.13-jammy
+    tty: true
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge

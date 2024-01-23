@@ -1,12 +1,27 @@
 version: "3"
 services:
   app:
-    image: pudding/docker-web:docker-web-apache-solr-app-20231111.173446
+    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20231111.173446
     tty: true
     ports:
-      - "8983:8983"
+      - "8080:8080"
     environment:
-      - LOCAL_VOLUMN_PATH=/var/solr/data/collection/conf/
-      - CONTAINER_NAME=docker-web-apache-solr-app
+      - LOCAL_VOLUMN_PATH=/app/
+      - CONTAINER_NAME=docker-web-meme-pam-explorer-app
+      - MONGO_HOST=db
     volumes: 
-      - "__SOURCE__/docker-web-Apache-Solr:/var/solr/data/collection/conf"
+      - "__SOURCE__/app/"
+    restart: on-failure
+    depends_on:
+      - db
+    networks:
+      - my_network
+  db:
+    image: mongo:6.0.13-jammy
+    tty: true
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
