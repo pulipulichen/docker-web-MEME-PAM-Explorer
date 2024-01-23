@@ -7,7 +7,7 @@ yaml_file="$script_dir/docker-compose-template.yml"
 # ========
 
 # Get the line starting with "image:"
-image_line=$(awk '/^ *image:/ {print $0}' "$yaml_file")
+image_line=$(awk '/^ *image:/ {print $0;exit}' "$yaml_file")
 
 # Extract the string before the last "-"
 image_config=$(echo "$image_line" | rev | cut -d'-' -f2- | rev)
