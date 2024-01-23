@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240124.020552
+    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240124.021044
     tty: true
     ports:
       - "8080:8080"
@@ -17,7 +17,7 @@ services:
     networks:
       - my_network
   db:
-    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240124.020552
+    image: mongo:6.0.13-jammy
     tty: true
     networks:
       - my_network

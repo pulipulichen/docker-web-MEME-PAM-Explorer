@@ -13,11 +13,11 @@ image_line=$(awk '/^ *image:/ {print $0;exit}' "$yaml_file")
 image_config=$(echo "$image_line" | rev | cut -d'-' -f2- | rev)
 
 # Replace the line with the new version
-sed -i "s|^ *image:.*|${image_config}-${new_version}|" "$yaml_file"
+sed -i "0,/^ *image:/s|^ *image:.*|${image_config}-${new_version}|" "$yaml_file"
 
 # ========
 
-IMAGE_NAME=$(awk '/^ *image:/ {sub(/^ *image: */, ""); sub(/ *$/, ""); print $0}' "$yaml_file")
+IMAGE_NAME=$(awk '/^ *image:/ {sub(/^ *image: */, ""); sub(/ *$/, ""); print $0;exit}' "$yaml_file")
 
 CONTAINER_NAME=$(awk -F= '/^ *- CONTAINER_NAME=/ {gsub(/ /,"",$2); print $2}' "$yaml_file")
 
