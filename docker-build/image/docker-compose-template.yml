@@ -10,7 +10,7 @@ services:
       - CONTAINER_NAME=docker-web-meme-pam-explorer-app
       - MONGO_HOST=db
     volumes: 
-      - "__SOURCE__/app/"
+      - "__SOURCE__/app/app/"
     restart: on-failure
     depends_on:
       - db
