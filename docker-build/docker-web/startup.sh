@@ -30,36 +30,6 @@ eval "${RUN_COMMAND}" &
 waitForConntaction "${LOCAL_PORT}"
 #echo "AFTER ================================================================="
 
-sleep 10
-
-DATA_PATH="${LOCAL_VOLUMN_PATH}data.csv"
-DATA_TEMP_PATH="${LOCAL_VOLUMN_PATH}data-temp.csv"
-rm -f "${DATA_TEMP_PATH}"
-
-python3 "/docker-build/python/init_data.py"
-
-if [ -f "$DATA_TEMP_PATH" ]; then
-  DATA_PATH="${DATA_TEMP_PATH}"
-fi
-
-python3 "/docker-build/python/prepend_id.py" "${DATA_PATH}"
-python3 "/docker-build/python/remove_not_in_id.py" "${DATA_PATH}"
-if [ ! -f "$file" ]; then
-  post -c collection "${DATA_PATH}"
-  cp -rf "${LOCAL_VOLUMN_PATH}" /tmp/
-else
-  if diff -r "${LOCAL_VOLUMN_PATH}" "/tmp/conf" &> /dev/null; then
-    echo "Folders are identical"
-  else
-    post -c collection "${DATA_PATH}"
-    cp -rf "${LOCAL_VOLUMN_PATH}" /tmp/
-  fi
-fi
-
-if [ "$INITED" != "true" ]; then
-  sleep 30
-fi
-
 # ----------------------------------------------------------------
 
 setupCloudflare() {
@@ -96,7 +66,7 @@ getCloudflarePublicURL() {
   # Extracting the URL using grep and awk
   url=$(grep -o 'https://[^ ]*\.trycloudflare\.com' "$file_path" | awk '/https:\/\/[^ ]*\.trycloudflare\.com/{print; exit}')
 
-  echo "$url/solr/collection/browse"
+  echo "$url${HOMEPAGE_URI}"
 }
 
 getCloudflarePublicURL "${LOCAL_PORT}" > "${LOCAL_VOLUMN_PATH}/.cloudflare.url"
@@ -112,7 +82,7 @@ while true; do
     if [[ $(echo "$response" | jq -e . 2>/dev/null) ]]; then
         echo "Received JSON, sleeping for 5 seconds..."
         sleep 5
-    elif [[ $response == *"<html>"* ]]; then
+    elif [[ $response =~ "<html" || $response =~ "<!DOCTYPE" ]]; then
         sleep 10
         echo "Received HTML, it's okay!"
         break

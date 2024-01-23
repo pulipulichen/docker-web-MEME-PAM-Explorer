@@ -8,10 +8,14 @@ FROM node:20.2.0-bullseye
 
 # For docker web
 ENV LOCAL_PORT=8080
-ENV RUN_COMMAND="/usr/local/bin/node /app/server.js"
+ENV LOCAL_VOLUMN_PATH=/app/app/
+ENV RUN_COMMAND="sleep 20;/usr/local/bin/node /app/server.js"
 ENV HOMEPAGE_URI=/
 COPY ./docker-build/docker-web/startup.sh /startup.sh
 CMD ["bash", "/startup.sh"]
+
+RUN apt-get update
+RUN apt-get install -y curl wget nano rsync mlocate vim
 
 # =================================================================
 
