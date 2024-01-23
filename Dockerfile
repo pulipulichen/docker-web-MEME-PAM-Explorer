@@ -9,9 +9,9 @@ FROM node:20.2.0-bullseye
 # For docker web
 ENV LOCAL_PORT=8080
 ENV LOCAL_VOLUMN_PATH=/app/app/
-ENV RUN_COMMAND="sleep 20;/usr/local/bin/node /app/server.js"
+ENV RUN_COMMAND="sleep 30;/usr/local/bin/node /app/server.js"
 ENV HOMEPAGE_URI=/
-COPY ./docker-build/docker-web/startup.sh /startup.sh
+
 CMD ["bash", "/startup.sh"]
 
 RUN apt-get update
@@ -79,3 +79,6 @@ COPY docker-build/derby/server.js /app/
 # EXPOSE 8009
 # the command that gets run inside the docker container
 # CMD ["/usr/local/bin/node", "/app/server.js"]
+
+
+COPY ./docker-build/docker-web/startup.sh /startup.sh

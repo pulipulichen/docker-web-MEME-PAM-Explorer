@@ -6,7 +6,7 @@ waitForConntaction() {
   port="$1"
   sleep 3
   while true; do
-    echo "http://127.0.0.1:$port"
+    echo "try to link... http://127.0.0.1:$port"
     if curl -sSf "http://127.0.0.1:$port" >/dev/null 2>&1; then
       echo "Connection successful."
       break
@@ -97,6 +97,7 @@ echo `date` > "${LOCAL_VOLUMN_PATH}/.docker-web.ready"
 
 echo "================================================================"
 echo "Docker Web is ready to serve."
+echo `cat "${LOCAL_VOLUMN_PATH}/.cloudflare.url"`
 echo "================================================================"
 
 # ----------------------------------------------------------------
