@@ -9,7 +9,8 @@
     "reset-start": "rm -rf ./docker-web-MEME-PAM-Explorer; docker-compose up --build",
     "d0.build": "docker-compose build",
     "d1.bash": "docker-compose run --service-ports app bash /console.sh",
-    "save-conf": "bash ./docker-build/save-conf.sh"
+    "save-conf": "bash ./docker-build/save-conf.sh",
+    "remove-containers": "docker rm $(docker ps -a --filter \"name=docker-web-meme-pam-explorer-\" -q)"
   },
   "repository": {
     "type": "git",
@@ -26,8 +27,9 @@
   "homepage": "https://github.com/pulipulichen/docker-web-MEME-PAM-Explorer#readme",
   "dependencies": {
     "@hapi/hapi": "21.3.2",
-    "sequelize": "6.35.2",
+    "redbean-node": "0.3.3",
     "pg": "8.11.3",
-    "pg-hstore": "2.3.4"
+    "pg-hstore": "2.3.4",
+    "xlsx": "0.18.5"
   }
 }

@@ -2,9 +2,24 @@ const Hapi = require('@hapi/hapi');
 
 const fs = require('fs');
 
-const { Sequelize, DataTypes } = require('sequelize');
-const {POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB} = process.env
-const sequelize = new Sequelize(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}`)
+const processODSFiles = require("./processODSFiles")
+
+// Define your Book model
+// const Book = sequelize.define('Book', {
+//     title: Sequelize.STRING,
+//     author: Sequelize.STRING,
+//     publicationYear: Sequelize.INTEGER,
+//     // Add more fields as needed
+//   });
+
+// // Synchronize the model with the database (create the table if it doesn't exist)
+// sequelize.sync()
+//   .then(() => {
+//     console.log('Database & table created!');
+//   })
+//   .catch(err => {
+//     console.error('Error:', err);
+//   });
 
 const init = async () => {
 
@@ -16,10 +31,22 @@ const init = async () => {
     server.route({
         method: 'GET',
         path: '/',
-        handler: (request, h) => {
+        handler: async (request, h) => {
+            // const bookData = {
+            //     title: "The Great Gatsby",
+            //     author: "F. Scott Fitzgerald",
+            //     publicationYear: 1925,
+            //     // Add more fields as needed
+            //   };
+            // await Book.create(bookData)
+
+            await processODSFiles()
+
             return 'Hello, world! ' + fs.readFileSync('/opt/input/demo.txt', 'utf8');
         }
     });
+
+    
 
     await server.start();
     console.log('Server running on %s', server.info.uri);

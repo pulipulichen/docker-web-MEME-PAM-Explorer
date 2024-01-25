@@ -13,24 +13,26 @@ services:
       - "./input:/opt/input"
     environment:
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
+      POSTGRES_PASSWORD: password
       POSTGRES_HOST: db
       POSTGRES_DB: db
     depends_on:
       - db
   db:
-    image: postgres:8.4.22
+    image: postgres:9.4.23
     tty: true
     networks:
       - docker_web_network
     # restart: always
     environment:
       POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
+      POSTGRES_PASSWORD: password
       POSTGRES_DB: db
   db_admin:
     image: dockage/phppgadmin
     tty: true
+    ports: # external:internal
+      - "28081:80"
     networks:
       - docker_web_network
     restart: always
