@@ -3,24 +3,25 @@ services:
   app:
     build: .
     tty: true
-    #user: solr
     ports: # external:internal
-      - "8080:8080"
+      - "28080:80"
     networks:
-      - my_network
-    depends_on:
-      - db
-    restart: on-failure
-    environment:
-      MONGO_HOST: db
+      - docker_web_network
+    # restart: on-failure
     volumes: 
-      - "./app:/app/app"
-  db:
-    image: mongo:6.0.13-jammy
-    tty: true
-    networks:
-      - my_network
+      - "./app:/opt/app"
+      - "./input:/opt/input"
+    # depends_on:
+    #   - db
+  # db:
+  #   image: postgres:13.13-bullseye
+  #   tty: true
+  #   networks:
+  #     - docker_web_network
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: example
 
 networks:
-  my_network:
+  docker_web_network:
     driver: bridge

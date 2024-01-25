@@ -24,7 +24,7 @@ rm -f "${LOCAL_VOLUMN_PATH}/.cloudflare.url" || true
 ls -la "${LOCAL_VOLUMN_PATH}/"
 
 # /usr/local/bin/node /app/server.js &
-eval "${RUN_COMMAND}" &
+eval "${STARTUP_COMMAND}" &
 
 #echo "BEFORE ================================================================="
 waitForConntaction "${LOCAL_PORT}"
@@ -82,7 +82,7 @@ while true; do
     if [[ $(echo "$response" | jq -e . 2>/dev/null) ]]; then
         echo "Received JSON, sleeping for 5 seconds..."
         sleep 5
-    elif [[ $response =~ "<html" || $response =~ "<!DOCTYPE" ]]; then
+    elif [[ $response =~ "<html" || $response =~ "<!DOCTYPE" || $response =~ "Hello, world!" ]]; then
         sleep 10
         echo "Received HTML, it's okay!"
         break
