@@ -19,11 +19,11 @@ services:
     depends_on:
       - db
   db:
-    image: postgres:9.4.23
+    image: postgres:8.4.22
     tty: true
     networks:
       - docker_web_network
-    restart: always
+    # restart: always
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
