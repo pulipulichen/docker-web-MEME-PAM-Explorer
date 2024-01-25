@@ -23,9 +23,10 @@ ENV HOMEPAGE_URI=/
 
 # =================================================================
 
+RUN npm install -g nodemon
+
 COPY package.json /opt/
 RUN npm install
-RUN npm install -g nodemon
 
 # =================================================================
 

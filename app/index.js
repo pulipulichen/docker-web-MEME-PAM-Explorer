@@ -2,6 +2,10 @@ const Hapi = require('@hapi/hapi');
 
 const fs = require('fs');
 
+const { Sequelize, DataTypes } = require('sequelize');
+const {POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB} = process.env
+const sequelize = new Sequelize(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}`)
+
 const init = async () => {
 
     const server = Hapi.server({

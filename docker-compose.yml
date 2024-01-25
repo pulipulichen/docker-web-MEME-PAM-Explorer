@@ -11,16 +11,34 @@ services:
     volumes: 
       - "./app:/opt/app"
       - "./input:/opt/input"
-    # depends_on:
-    #   - db
-  # db:
-  #   image: postgres:13.13-bullseye
-  #   tty: true
-  #   networks:
-  #     - docker_web_network
-  #   restart: always
-  #   environment:
-  #     POSTGRES_PASSWORD: example
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_HOST: db
+      POSTGRES_DB: db
+    depends_on:
+      - db
+  db:
+    image: postgres:9.4.23
+    tty: true
+    networks:
+      - docker_web_network
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db
+  db_admin:
+    image: dockage/phppgadmin
+    tty: true
+    networks:
+      - docker_web_network
+    restart: always
+    environment:
+      PHP_PG_ADMIN_SERVER_HOST: db
+      PHP_PG_ADMIN_SERVER_DEFAULT_DB: db
+    depends_on:
+      - db
 
 networks:
   docker_web_network:
