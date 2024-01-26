@@ -42,7 +42,8 @@ const init = async () => {
 
             await processODSFiles()
 
-            return 'Hello, world! ' + fs.readFileSync('/opt/input/demo.txt', 'utf8');
+            // return 'Hello, world! ' + fs.readFileSync('/opt/input/demo.txt', 'utf8');
+            return 'Hello, world! '
         }
     });
 
