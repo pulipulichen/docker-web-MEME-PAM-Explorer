@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const XLSX = require('xlsx');
+const sleep = require('./sleep');
 
 // const { Sequelize, DataTypes } = require('sequelize');
 const {POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB} = process.env
@@ -79,7 +80,7 @@ async function processODSFiles() {
       // await model.bulkCreate(jsonData);
 
       // Now you can work with the jsonData as a JSON array
-      console.log(`Data from ${file}:`, jsonData);
+      // console.log(`Data from ${file}:`, jsonData);
 
       // let beam = R.dispense(tableName);
       await batchImportData(tableName, jsonData)
@@ -90,6 +91,10 @@ async function processODSFiles() {
     console.log('All ODS files processed successfully');
   } catch (error) {
     console.error('Error processing ODS files:', error);
+
+    await sleep(5000)
+
+    await processODSFiles()
   }
 }
 

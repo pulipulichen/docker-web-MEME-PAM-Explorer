@@ -1,4 +1,3 @@
-const processODSFiles = require("./../helpers/processODSFiles")
 
 module.exports = function (server) {
   server.route({
@@ -18,7 +17,7 @@ module.exports = function (server) {
         // return 'Hello, world! ' + fs.readFileSync('/opt/input/demo.txt', 'utf8');
         // return 'Hello, world! '
 
-        return h.view('index', {
+        return h.view('routes/index/index', {
             title: 'My Website',
             // header: '<h1>Welcome to My Website</h1>', 
             // content: '<h2>Hello, {{name}}!</h2>',

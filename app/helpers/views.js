@@ -6,9 +6,9 @@ module.exports = function (server) {
           html: require('handlebars')
       },
       relativeTo: Path.join(__dirname, '../'),
-      path: 'templates',
+      path: '.',
       helpersPath: 'helpers',
       layout: 'layout', // Specify the layout file
-      layoutPath: 'templates/layout', // Specify the layout file 
+      layoutPath: 'layout', // Specify the layout file 
   });
 }
