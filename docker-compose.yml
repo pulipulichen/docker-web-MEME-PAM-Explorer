@@ -13,9 +13,10 @@ services:
       - "./input:/opt/input"
     environment:
       - "POSTGRES_USER=user"
-      - "POSTGRES_PASSWORD=pass"
+      - "POSTGRES_PASSWORD=password"
       - "POSTGRES_HOST=db"
       - "POSTGRES_DB=db"
+      - "WAIT_FOR_SERVICE=db:5432"
     depends_on:
       - db
   db:

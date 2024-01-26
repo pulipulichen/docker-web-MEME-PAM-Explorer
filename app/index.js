@@ -1,13 +1,9 @@
 const Hapi = require('@hapi/hapi');
 
 const init = async () => {
-
-    // await require('./helpers/init')()
-
-    const server = Hapi.server({
-        port: 80,
-        // host: '::'
-    });
+    await require('./helpers/init')()
+    
+    const server = Hapi.server({port: 80});
 
     await server.register([
         require('@hapi/vision'),
@@ -22,6 +18,7 @@ const init = async () => {
 
     await server.start();
     console.log('Server running on %s', server.info.uri);
+
 };
 
 process.on('unhandledRejection', (err) => {

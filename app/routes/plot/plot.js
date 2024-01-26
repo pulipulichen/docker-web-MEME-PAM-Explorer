@@ -4,7 +4,7 @@ module.exports = function (server) {
     method: 'GET',
     path: '/plot',
     handler: async (request, h) => {
-        return h.view('index', {
+        return h.view('routes/plot/plot', {
             title: 'My Website',
             name: 'John'
         })

@@ -4,19 +4,6 @@ module.exports = function (server) {
     method: 'GET',
     path: '/',
     handler: async (request, h) => {
-        // const bookData = {
-        //     title: "The Great Gatsby",
-        //     author: "F. Scott Fitzgerald",
-        //     publicationYear: 1925,
-        //     // Add more fields as needed
-        //   };
-        // await Book.create(bookData)
-
-        // await processODSFiles()
-
-        // return 'Hello, world! ' + fs.readFileSync('/opt/input/demo.txt', 'utf8');
-        // return 'Hello, world! '
-
         return h.view('routes/index/index', {
             title: 'My Website',
             // header: '<h1>Welcome to My Website</h1>', 

@@ -15,7 +15,7 @@ services:
       - LOCAL_VOLUMN_PATH=/opt/app/
       - CONTAINER_NAME=docker-web-meme-pam-explorer-app
       - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
+      - POSTGRES_PASSWORD=password
       - POSTGRES_HOST=db
       - POSTGRES_DB=db
     depends_on:

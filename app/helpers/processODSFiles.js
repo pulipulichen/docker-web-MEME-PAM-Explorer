@@ -3,17 +3,7 @@ const path = require('path');
 const XLSX = require('xlsx');
 const sleep = require('./sleep');
 
-// const { Sequelize, DataTypes } = require('sequelize');
-const {POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB} = process.env
-// const sequelize = new Sequelize(`postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}`)
-const { R } = require("redbean-node");
-R.setup('postgres', {
-  host: POSTGRES_HOST,
-  user: POSTGRES_USER,
-  password: POSTGRES_PASSWORD,
-  database: POSTGRES_DB
-});
-
+const R = require('./db')
 
 // Specify the input directory where your *.ods files are located
 const inputDirectory = '/opt/input'; // Change this to your input directory path
@@ -35,25 +25,38 @@ function getFilenameWithoutExtension(filePath) {
 
 async function batchImportData(tableName, jsonDataArray) {
   try {
-    // Start a transaction
-    R.begin();
+    // let book = R.dispense('book');
+    // book.title = 'Learn to Program';
+    // book.rating = 10;
+    // let id = await R.store(book);
 
-    // Loop through the JSON array and create records
+    // Start a transaction
+    // R.begin(); 
+    // console.log(tableName)
+    // Loop through the JSON array and create records 
     for (const jsonData of jsonDataArray) {
-      const item = R.dispense(tableName);
+      let item = await R.findOne('item', 'type = ? and item_id = ?', [tableName, jsonData.item_id]);
+
+      if (!item) {
+        item = R.dispense('item')
+      }
+      // console.log(jsonData)
       for (const key in jsonData) {
         if (jsonData.hasOwnProperty(key)) {
+
           item[key] = jsonData[key];
         }
+        item.type = tableName
       }
-      R.store(item);
+      let id = await R.store(item);
+      // console.log({id})
     }
 
     // Commit the transaction
-    R.commit();
+    // R.commit();
     console.log('Data imported successfully');
   } catch (error) {
-    // Rollback the transaction in case of an error
+    // Rollback the transaction in case of an error 
     R.rollback();
     console.error('Error importing data:', error);
   }
@@ -64,28 +67,15 @@ async function processODSFiles() {
   try {
     const odsFiles = fs.readdirSync(inputDirectory).filter((file) => file.endsWith('.ods'));
 
+
+
     for (const file of odsFiles) {
       const filePath = path.join(inputDirectory, file);
       const jsonData = await readODSFile(filePath);
 
-
       const  tableName = getFilenameWithoutExtension(filePath);
-      // Create a dynamic model based on the JSON data
-      // const model = sequelize.define(tableName, {});
-
-      // // Synchronize the model with the database
-      // await model.sync();
-
-      // // Insert JSON data into the table
-      // await model.bulkCreate(jsonData);
-
-      // Now you can work with the jsonData as a JSON array
-      // console.log(`Data from ${file}:`, jsonData);
-
-      // let beam = R.dispense(tableName);
+      
       await batchImportData(tableName, jsonData)
-
-
     }
 
     console.log('All ODS files processed successfully');
