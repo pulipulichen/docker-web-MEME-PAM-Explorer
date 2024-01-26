@@ -1,6 +1,6 @@
 
 const getOrCreateTooltip = (chart) => {
-  let tooltipEl = chart.canvas.parentNode.querySelector('div');
+  let tooltipEl = chart.canvas.parentNode.querySelector('div.tooltip');
 
   if (!tooltipEl) {
     tooltipEl = document.createElement('div');
@@ -20,13 +20,6 @@ const getOrCreateTooltip = (chart) => {
 
     tooltipEl.appendChild(table);
     chart.canvas.parentNode.appendChild(tooltipEl);
-
-    $(tooltipEl).on('mouseenter', (e) => {
-      e.preventDefault();
-      e.stopPropagation()
-
-      console.log('ok')
-    })
 
     $(tooltipEl).hover(() => {
       isHoverTooltip = true
@@ -52,7 +45,7 @@ const externalTooltipHandler = (context) => {
   // Tooltip Element
   const {chart, tooltip} = context;
   const tooltipEl = getOrCreateTooltip(chart);
-  console.log(tooltip.opacity)
+  // console.log(tooltip.opacity)
   // Hide if no tooltip
   if (tooltip.opacity === 0) {
     clearTimeout(hideTimer)
@@ -71,7 +64,7 @@ const externalTooltipHandler = (context) => {
     const titleLines = tooltip.title || [];
     const bodyLines = tooltip.body.map(b => b.lines);
     const items = tooltip.dataPoints.map(({raw}) => raw)
-    // console.log(items)
+    console.log(items)
     // console.log(tooltip)
 
     const tableHead = document.createElement('thead');
@@ -110,8 +103,8 @@ const externalTooltipHandler = (context) => {
       td.style.borderWidth = 0;
       td.style.color = '#FFF';
 
-      let {image, pattern, item_id} = items[i]
-      let info = `<a href="/raw_post/${item_id}" target="raw_post_${item_id}">${item_id} (${pattern})</a>`
+      let {image, pattern, item_id, type} = items[i]
+      let info = `<a href="/post/${type}/${item_id}" target="item_${item_id}">${item_id} (${pattern})</a>`
       // const text = document.createTextNode(body);
 
       td.appendChild(span);
@@ -119,7 +112,7 @@ const externalTooltipHandler = (context) => {
       // td.appendChild(text);
 
 
-      $(td).append(`<a href="/raw_post/${item_id}" target="raw_post_${item_id}"><img src="/input/${image}" /></a>`)
+      $(td).append(`<a href="/post/${type}/${item_id}" target="item_${item_id}"><img src="/input/${image}" /></a>`)
       tr.appendChild(td);
       tableBody.appendChild(tr);
     });
@@ -127,7 +120,7 @@ const externalTooltipHandler = (context) => {
     const tableRoot = tooltipEl.querySelector('table');
 
     // Remove old children
-    while (tableRoot.firstChild) {
+    while (tableRoot && tableRoot.firstChild) {
       tableRoot.firstChild.remove();
     }
 

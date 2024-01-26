@@ -27,10 +27,10 @@ module.exports = function (server) {
     method: 'GET',
     path: `/${name}/{type?}`,
     handler: async (request, h) => {
-      let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request)
+      let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request, name)
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
-        page: '/patterns',
+        page: '/' + name,
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
         style: name,

@@ -4,7 +4,7 @@ module.exports = function (server) {
     method: 'GET',
     path: '/{type?}',
     handler: async (request, h) => {
-        let layoutVariables = await require('./../../helpers/getLayoutVariables')(request)
+        let layoutVariables = await require('./../../helpers/getLayoutVariables')(request, '/')
         return h.redirect(`/plot/${layoutVariables.type}`);
 
         // return h.view('routes/index/index', {

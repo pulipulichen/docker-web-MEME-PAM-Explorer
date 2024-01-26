@@ -11,16 +11,16 @@ async function getItems(type, pattern) {
 
 module.exports = function (server) {
   let name = 'items'
-
+  
   server.route({
     method: 'GET',
     path: `/${name}/{type}/{pattern}`,
     handler: async (request, h) => {
-      let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request)
+      let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request, name)
       let pattern = request.params.pattern
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
-        page: '/items',
+        page: '/' + name,
 
         patterns: await require('./../../helpers/getPatterns')(layoutVariables.type),
         pattern,
