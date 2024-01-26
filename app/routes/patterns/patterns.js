@@ -1,6 +1,6 @@
 const R = require('../../helpers/db.js');
 
-async function getPatterns(type = 'visual-patterns') {
+async function getDatasets(type = 'visual-patterns') {
 
     let patterns = await require('./../../helpers/getPatterns')(type)
 
@@ -34,7 +34,8 @@ module.exports = function (server) {
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
         style: name,
-        patterns: await getPatterns(layoutVariables.type)
+        patterns: await require('./../../helpers/getPatterns')(layoutVariables.type),
+        datasets: await getDatasets(layoutVariables.type)
       })
     }
 });

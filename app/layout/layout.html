@@ -12,11 +12,11 @@
   <body>
     <!-- ================= -->
 
-    <h1>
-      <a href="/">
+    <a href="/{{type}}"></a>
+      <h1>
         <img src="/static/images/banner.png" alt="{{ CONFIG.title }}" title="{{ CONFIG.title }}" />
-      </a>
-    </h1>
+      </h1>
+    </a>
 
     
     <!-- ================= -->
@@ -28,7 +28,7 @@
         {{#ifCond this ../type}}
           {{this}}
         {{else}}
-          <a href="{{../page}}/{{this}}">{{this}}</a>  
+          <a href="{{../page}}/{{this}}" class="item">{{this}}</a>  
         {{/ifCond}}
         </div>
       {{/each}}
@@ -44,7 +44,7 @@
           Plot
         </div>
       {{else}}
-        <a href="/plot/{{type}}">
+        <a href="/plot/{{type}}" class="item">
           Plot
         </a>
       {{/ifCond}}
@@ -54,18 +54,18 @@
           Patterns
         </div>
       {{else}}
-        <a href="/patterns/{{type}}">
+        <a href="/patterns/{{type}}" class="item">
           Patterns
         </a>
       {{/ifCond}}
       
-      {{#ifCond page "/list"}}
+      {{#ifCond page "/items"}}
         <div class="item active">
-          List: {{ pattern }}
+          {{ pattern }} Items
         </div>
       {{else}}
         <div class="item disabled">
-          List
+          Items
         </div>
       {{/ifCond}}
 

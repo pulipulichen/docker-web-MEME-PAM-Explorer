@@ -1,8 +1,14 @@
+<div class="pattern-nav">
+  {{#each patterns}}
+     <a class="item" href="/items/{{../type}}/{{this}}">{{ this }}</a>
+  {{/each}}
+</div>
+
 <div class="patterns">
 
-  {{#each patterns}}
+  {{#each datasets}}
     <div class="pattern">
-      <a href="/list/{{../type}}/{{this.pattern}}">
+      <a href="/items/{{../type}}/{{this.pattern}}">
         <h2>{{this.pattern}}</h2>
       </a>
       {{#each this.items}}

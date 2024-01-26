@@ -17,6 +17,7 @@ const init = async () => {
     require('./routes/index/index')(server)
     require('./routes/plot/plot')(server)
     require('./routes/patterns/patterns')(server)
+    require('./routes/items/items')(server)
 
     await server.start();
     console.log('Server running on %s', server.info.uri);
