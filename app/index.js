@@ -40,7 +40,7 @@ const init = async () => {
             //   };
             // await Book.create(bookData)
 
-            await processODSFiles()
+            // await processODSFiles()
 
             // return 'Hello, world! ' + fs.readFileSync('/opt/input/demo.txt', 'utf8');
             return 'Hello, world! '

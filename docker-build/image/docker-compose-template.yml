@@ -6,7 +6,7 @@ services:
     ports:
       - "__EXT_PORT__:80"
     networks:
-      - docker_web_network
+      - __NETWORK__
     # restart: on-failure
     volumes: 
       - "__SOURCE_INPUT__:/opt/input/"
@@ -24,7 +24,7 @@ services:
     image: postgres:9.4.23
     tty: true
     networks:
-      - docker_web_network
+      - __NETWORK__
     # restart: always
     environment:
       POSTGRES_USER: user
@@ -36,7 +36,7 @@ services:
     ports: # external:internal
       - "28081:80"
     networks:
-      - docker_web_network
+      - __NETWORK__
     restart: always
     environment:
       PHP_PG_ADMIN_SERVER_HOST: db
@@ -45,5 +45,5 @@ services:
       - db
 
 networks:
-  docker_web_network:
+  __NETWORK__:
     driver: bridge

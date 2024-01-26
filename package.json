@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "docker-compose up --build",
+    "start": "docker-compose down;docker-compose up --build",
     "commit-docker-image": "docker-compose build; bash ./docker-build/image/commit-docker-image.sh",
     "reset-start": "rm -rf ./docker-web-MEME-PAM-Explorer; docker-compose up --build",
     "d0.build": "docker-compose build",
