@@ -4,7 +4,7 @@ services:
     image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240126.040832
     tty: true
     ports:
-      - "28080:80"
+      - "__EXT_PORT__:80"
     environment:
       - LOCAL_VOLUMN_PATH=/opt/app/
       - CONTAINER_NAME=docker-web-meme-pam-explorer-app

@@ -6,7 +6,10 @@ PROJECT_NAME=docker-web-MEME-PAM-Explorer
 
 getRealpath() {
   path="$1"
-  if command -v realpath &> /dev/null; then
+
+  if [[ $path == /* || -z $path ]]; then
+    echo "$path"
+  elif command -v realpath &> /dev/null; then
     path=`realpath "${path}"`
   else
     path=$(cd "$(dirname "${path}")"; pwd)/"$(basename "${path}")"
