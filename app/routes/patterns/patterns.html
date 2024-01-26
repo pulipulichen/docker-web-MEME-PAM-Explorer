@@ -1,0 +1,15 @@
+<div class="patterns">
+
+  {{#each patterns}}
+    <div class="pattern">
+      <a href="/list/{{../type}}/{{this.pattern}}">
+        <h2>{{this.pattern}}</h2>
+      </a>
+      {{#each this.items}}
+        <a href="/post/{{this.item_id}}" class="item">
+          <img src="/input/{{ this.image }}" alt="Item ID: {{this.item_id}}" title="Item ID: {{this.item_id}}" />
+        </a>
+      {{/each}}
+    </div>
+  {{/each}}
+</div>

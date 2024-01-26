@@ -18,20 +18,64 @@
       </a>
     </h1>
 
+    
     <!-- ================= -->
+    <hr />
+
     <div class="nav">
       {{#each TYPES}}
         <div class="item">
         {{#ifCond this ../type}}
           {{this}}
         {{else}}
-          <a href="{{ ../page }}/{{this}}">{{this}}</a>  
+          <a href="{{../page}}/{{this}}">{{this}}</a>  
         {{/ifCond}}
         </div>
       {{/each}}
     </div>
 
     <!-- ================= -->
+    <hr />
+
+    <div class="subnav">
+      
+      {{#ifCond page "/plot"}}
+        <div class="item active">
+          Plot
+        </div>
+      {{else}}
+        <a href="/plot/{{type}}">
+          Plot
+        </a>
+      {{/ifCond}}
+
+      {{#ifCond page "/patterns"}}
+        <div class="item active">
+          Patterns
+        </div>
+      {{else}}
+        <a href="/patterns/{{type}}">
+          Patterns
+        </a>
+      {{/ifCond}}
+      
+      {{#ifCond page "/list"}}
+        <div class="item active">
+          List: {{ pattern }}
+        </div>
+      {{else}}
+        <div class="item disabled">
+          List
+        </div>
+      {{/ifCond}}
+
+      <div class="item disabled">
+        Post
+      </div>
+    </div>
+
+    <!-- ================= -->
+    <hr />
 
     {{{content}}}
     
