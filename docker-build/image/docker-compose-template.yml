@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240126.180859
+    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240126.180954
     tty: true
     ports:
       - "__EXT_PORT__:80"

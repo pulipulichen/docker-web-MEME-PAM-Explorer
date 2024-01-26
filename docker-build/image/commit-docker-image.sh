@@ -19,7 +19,7 @@ sed -i "0,/^ *image:/s|^ *image:.*|${image_config}-${new_version}|" "$yaml_file"
 
 IMAGE_NAME=$(awk '/^ *image:/ {sub(/^ *image: */, ""); sub(/ *$/, ""); print $0;exit}' "$yaml_file")
 
-CONTAINER_NAME=$(awk -F= '/^ *- CONTAINER_NAME=/ {gsub(/ /,"",$2); print $2}' "$yaml_file")
+CONTAINER_NAME=$(awk -F= '/^ *- \"CONTAINER_NAME=/ {gsub(/ /,"",$2); print $2}' "$yaml_file")
 
 docker tag ${CONTAINER_NAME} ${IMAGE_NAME}
 docker push "${IMAGE_NAME}"
