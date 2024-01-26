@@ -1,12 +1,12 @@
 const R = require('../../helpers/db.js');
 
-async function getDatasets () {
+async function getDatasets (type = 'visual-patterns') {
     // let items = await R.getAll('item', 'type = ?', ['visual-patterns'])
-    let items = await R.getAll(`SELECT pattern, x, y, item_id, centroid_distance, image, url FROM item WHERE type = 'visual-patterns' ORDER BY centroid_distance DESC`)
+    let results = await R.getAll(`SELECT pattern, x, y, item_id, centroid_distance, image, url FROM item WHERE type = '${type}' ORDER BY centroid_distance DESC`)
 
     let patterns = {}
     // console.log(items)
-    items.rows.forEach(item => {
+    results.rows.forEach(item => {
         let pattern = item.pattern
 
         if (!patterns[pattern]) {
@@ -31,15 +31,21 @@ async function getDatasets () {
 }
 
 module.exports = function (server) {
+  let name = 'plot'
+
   server.route({
     method: 'GET',
-    path: '/plot',
+    path: `/${name}/{type?}`,
     handler: async (request, h) => {
-        
-        return h.view('routes/plot/plot', {  
-            style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
-            datasets: await getDatasets()
-        })
+      let layoutVariables = await require('./../../helpers/getLayoutVariables')(request)
+      return h.view(`routes/${name}/${name}`, {  
+        ...layoutVariables,
+        page: '/plot',
+
+        // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
+        style: name,
+        datasets: await getDatasets(layoutVariables.type)
+      })
     }
 });
 }

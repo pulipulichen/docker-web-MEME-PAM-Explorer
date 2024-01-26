@@ -2,27 +2,38 @@
   <head>
     <script type="text/javascript" src="/static/jquery.min.js"></script>
 
-    {{{ style }}}
-    <script>
-      less = {
-        env: "production",
-        // async: false,
-        // fileAsync: false,
-        // poll: 1000,
-        // functions: {},
-        // dumpLineNumbers: "comments",
-        // relativeUrls: false,
-        // rootpath: ":/a.com/"
-      };
-    </script>
+    <link rel="stylesheet/less" type="text/css" href="/static/styles/layout.less" />
+    {{#if style}}
+      <link rel="stylesheet/less" type="text/css" href="/static/{{ style }}/{{ style }}.less" />
+    {{/if}}
+    <script src="/static/styles/less.env.js" type="text/javascript"></script>
     <script src="/static/styles/less.min.js" type="text/javascript"></script>
   </head>
   <body>
+    <!-- ================= -->
+
+    <h1>
+      <a href="/">
+        <img src="/static/images/banner.png" alt="{{ CONFIG.title }}" title="{{ CONFIG.title }}" />
+      </a>
+    </h1>
+
+    <!-- ================= -->
+    <div class="nav">
+      {{#each TYPES}}
+        <div class="item">
+        {{#ifCond this ../type}}
+          {{this}}
+        {{else}}
+          <a href="{{ ../page }}/{{this}}">{{this}}</a>  
+        {{/ifCond}}
+        </div>
+      {{/each}}
+    </div>
+
+    <!-- ================= -->
+
     {{{content}}}
     
-    {{ title }}
-    <!--
-    <img src="/static/icon.png" />
-    -->
  </body>
 </html>

@@ -2,14 +2,16 @@
 module.exports = function (server) {
   server.route({
     method: 'GET',
-    path: '/',
+    path: '/{type?}',
     handler: async (request, h) => {
         return h.view('routes/index/index', {
-            title: 'My Website',
-            // header: '<h1>Welcome to My Website</h1>', 
+            ...(await require('./../../helpers/getLayoutVariables')(request)),
+            page: '',
+            // header: '<h1>Welcome to My Website</h1>',  
             // content: '<h2>Hello, {{name}}!</h2>',
             // footer: '<p>&copy; 2024 My Website</p>',
-            name: 'John'
+            name: 'John',
+            
         })
     }
 });

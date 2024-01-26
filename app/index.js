@@ -7,9 +7,8 @@ const init = async () => {
 
     await server.register([
         require('@hapi/vision'),
-        require('@hapi/inert'),
-        // require('./routes/less') 
-    ]);
+        require('@hapi/inert')
+    ]); 
 
     require('./routes/static')(server)
     require('./routes/input')(server)
