@@ -12,7 +12,7 @@
         <h2>{{this.pattern}}</h2>
       </a>
       {{#each this.items}}
-        <a href="/post/{{this.item_id}}" class="item">
+        <a href="/post/{{../../type}}/{{this.item_id}}" class="item" target="item_{{ item_id }}">
           <img src="/input/{{ this.image }}" alt="Item ID: {{this.item_id}}" title="Item ID: {{this.item_id}}" />
         </a>
       {{/each}}

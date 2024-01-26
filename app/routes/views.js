@@ -8,7 +8,7 @@ module.exports = function (server) {
       relativeTo: Path.join(__dirname, '../'),
       path: '.',
       helpersPath: 'helpers',
-      layout: 'layout', // Specify the layout file
+      layout: 'standard', // Specify the layout file
       layoutPath: 'layout', // Specify the layout file 
   });
 }
