@@ -10,8 +10,9 @@ const init = async () => {
         require('@hapi/inert')
     ]);
 
-    require('./helpers/static')(server)
-    require('./helpers/views')(server)
+    require('./routes/static')(server)
+    require('./routes/input')(server)
+    require('./routes/views')(server)
 
     require('./routes/index/index')(server)
     require('./routes/plot/plot')(server)
