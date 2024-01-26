@@ -75,5 +75,13 @@ const scatterChart = new Chart(ctx, {
                 type: 'linear', // Y-axis type
             }
         },
+        onClick: (e) => {
+            // const canvasPosition = Chart.helpers.getRelativePosition(e, chart);
+
+            // // Substitute the appropriate scale IDs
+            // const dataX = chart.scales.x.getValueForPixel(canvasPosition.x);
+            // const dataY = chart.scales.y.getValueForPixel(canvasPosition.y);
+            console.log(e)
+        }
     }
 });

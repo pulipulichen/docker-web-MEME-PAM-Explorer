@@ -1,6 +1,21 @@
 <html>
   <head>
     <script type="text/javascript" src="/static/jquery.min.js"></script>
+
+    {{{ style }}}
+    <script>
+      less = {
+        env: "production",
+        // async: false,
+        // fileAsync: false,
+        // poll: 1000,
+        // functions: {},
+        // dumpLineNumbers: "comments",
+        // relativeUrls: false,
+        // rootpath: ":/a.com/"
+      };
+    </script>
+    <script src="/static/styles/less.min.js" type="text/javascript"></script>
   </head>
   <body>
     {{{content}}}

@@ -35,11 +35,17 @@ async function batchImportData(tableName, jsonDataArray) {
     // console.log(tableName)
     // Loop through the JSON array and create records 
     for (const jsonData of jsonDataArray) {
-      let item = await R.findOne('item', 'type = ? and item_id = ?', [tableName, jsonData.item_id]);
+      let item
+      try {
+        item = await R.findOne('item', 'type = ? and item_id = ?', [tableName, jsonData.item_id]);
+      }
+      catch (e) {
+      }
 
       if (!item) {
         item = R.dispense('item')
-      }
+      } 
+
       // console.log(jsonData)
       for (const key in jsonData) {
         if (jsonData.hasOwnProperty(key)) {
@@ -66,8 +72,6 @@ async function batchImportData(tableName, jsonDataArray) {
 async function processODSFiles() {
   try {
     const odsFiles = fs.readdirSync(inputDirectory).filter((file) => file.endsWith('.ods'));
-
-
 
     for (const file of odsFiles) {
       const filePath = path.join(inputDirectory, file);
