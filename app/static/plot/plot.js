@@ -3,18 +3,19 @@ const ctx = document.getElementById('scatterChart').getContext('2d');
 const scatterChart = new Chart(ctx, {
     type: 'scatter',
     data: {
-        datasets: [{
-            label: 'Scatter Plot',
-            data: [{ x: 1, y: 2 }, { x: 2, y: 3 }, { x: 3, y: 4 }],
-            backgroundColor: 'blue', // Point color
-            pointRadius: 5,           // Point size
-        },
-        {
-          label: 'Scatter Plot Red',
-          data: [{ x: 2, y: 4, item_id: 100 }, { x: 2, y: 6 }, { x: 3, y: 1 }],
-          backgroundColor: 'red', // Point color
-          pointRadius: 5,           // Point size
-        }]
+        // datasets: [{
+        //     label: 'Scatter Plot',
+        //     data: [{ x: 1, y: 2 }, { x: 2, y: 3 }, { x: 3, y: 4 }],
+        //     backgroundColor: 'blue', // Point color
+        //     pointRadius: 5,           // Point size
+        // },
+        // {
+        //   label: 'Scatter Plot Red',
+        //   data: [{ x: 2, y: 4, item_id: 100 }, { x: 2, y: 6 }, { x: 3, y: 1 }],
+        //   backgroundColor: 'red', // Point color
+        //   pointRadius: 5,           // Point size
+        // }]
+        datasets
     },
     options: {
         plugins: {
@@ -23,11 +24,25 @@ const scatterChart = new Chart(ctx, {
                     wheel: {
                         enabled: true, // Enable zooming with the mouse wheel
                     },
-                    drag: {
-                        enabled: true, // Enable panning by dragging
-                    },
-                    mode: 'xy', // Allow zooming on both X and Y axes
-                }
+                    // drag: {
+                    //     enabled: true, // Enable panning by dragging
+                    // },
+                    // dblclick: {
+                    //   enabled: false
+                    // },
+                    // mode: 'xy', // Allow zooming on both X and Y axes
+                    // enabled: true,
+                    mode: 'xy', // Enable zooming on both axes (x and y)
+                    speed: 100
+                },
+                pan: {
+                  enabled: true,
+                  mode: 'xy',
+                  seepd: 0.5
+                },
+            },
+            colors: {
+              forceOverride: true
             },
             // Customize the tooltips
             tooltip: {

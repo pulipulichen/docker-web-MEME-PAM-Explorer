@@ -79,7 +79,7 @@ const externalTooltipHandler = (context) => {
 
       td.appendChild(span);
       td.appendChild(text);
-      $(td).append('<img src="https://www.chartjs.org/docs/latest/favicon.ico" />')
+      // $(td).append('<img src="https://www.chartjs.org/docs/latest/favicon.ico" />')
       tr.appendChild(td);
       tableBody.appendChild(tr);
     });
