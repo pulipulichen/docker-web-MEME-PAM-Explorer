@@ -73,6 +73,15 @@ async function processODSFiles() {
   try {
     const odsFiles = fs.readdirSync(inputDirectory).filter((file) => file.endsWith('.ods'));
 
+    if (odsFiles.length === 0) {
+      let demoDirectory = path.join(__dirname, '../demo/')
+      demoFiles = fs.readdirSync(demoDirectory).filter((file) => file.endsWith('.ods'))
+      for (const file of demoFiles) {
+        fs.copyFileSync(path.join(demoDirectory, file), path.join(inputDirectory, file))
+        odsFiles.push(file)
+      }
+    }
+
     for (const file of odsFiles) {
       const filePath = path.join(inputDirectory, file);
       const jsonData = await readODSFile(filePath);
