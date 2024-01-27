@@ -11,9 +11,13 @@ async function getDatasets(type = 'visual-patterns') {
         let pattern = patterns[i]
         let results = await R.getAll(`SELECT item_id, image FROM item WHERE type = '${type}' and pattern = '${pattern}' ORDER BY centroid_distance DESC LIMIT 10`)
 
+        if (results && results.rows) {
+          results = results.rows
+        }
+
         datasets.push({
           pattern,
-          items: results.rows
+          items: results
         })
     }
 

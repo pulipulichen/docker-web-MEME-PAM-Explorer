@@ -6,7 +6,11 @@ async function getItems(type, pattern) {
     
     let results = await R.getAll(`SELECT item_id, image FROM item WHERE type = '${type}' and pattern = '${pattern}' ORDER BY centroid_distance DESC`)
 
-    return results.rows
+    if (results && results.rows) {
+      results = results.rows
+    }
+
+    return results
 }
 
 module.exports = function (server) {

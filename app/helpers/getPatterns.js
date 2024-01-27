@@ -9,7 +9,11 @@ module.exports = async function (type = 'visual-patterns') {
 
   let results = await R.getAll(`SELECT pattern FROM item WHERE type = '${type}' GROUP BY type, pattern ORDER BY pattern ASC`)
 
-  PATTERNS[type] = results.rows.map(({pattern}) => pattern)
+  if (results && results.rows) {
+    results = results.rows
+  }
+
+  PATTERNS[type] = results.map(({pattern}) => pattern)
   // console.log(TYPES)
   return PATTERNS[type]
 }

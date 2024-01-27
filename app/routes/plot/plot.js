@@ -6,13 +6,18 @@ async function getDatasets (type = 'visual-patterns') {
 
     let patterns = {}
     // console.log(items)
-    results.rows.forEach(item => {
-        let pattern = item.pattern
 
-        if (!patterns[pattern]) {
-            patterns[pattern] = []
-        }
-        patterns[pattern].push(item)
+    if (results && results.rows) {
+      results = results.rows
+    }
+
+    results.forEach(item => {
+      let pattern = item.pattern
+
+      if (!patterns[pattern]) {
+        patterns[pattern] = []
+      }
+      patterns[pattern].push(item)
     })
 
     let datasets = Object.keys(patterns).map(label => {

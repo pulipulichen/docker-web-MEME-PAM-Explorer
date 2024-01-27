@@ -5,43 +5,7 @@ services:
     tty: true
     ports: # external:internal
       - "28080:80"
-    networks:
-      - docker_web_network
-    # restart: on-failure
     volumes: 
       - "./app:/opt/app"
       - "./input:/opt/input"
-    environment:
-      - "POSTGRES_USER=user"
-      - "POSTGRES_PASSWORD=password"
-      - "POSTGRES_HOST=db"
-      - "POSTGRES_DB=db"
-    depends_on:
-      - db
-  db:
-    image: postgres:9.4.23
-    tty: true
-    networks:
-      - docker_web_network
-    # restart: always
-    environment:
-      - "POSTGRES_USER=user"
-      - "POSTGRES_PASSWORD=password"
-      - "POSTGRES_DB=db"
-  db_admin:
-    image: dockage/phppgadmin
-    tty: true
-    ports: # external:internal
-      - "28081:80"
-    networks:
-      - docker_web_network
-    restart: always
-    environment:
-      - "PHP_PG_ADMIN_SERVER_HOST=db"
-      - "PHP_PG_ADMIN_SERVER_DEFAULT_DB=db"
-    depends_on:
-      - db
-
-networks:
-  docker_web_network:
-    driver: bridge
+    # restart: on-failure

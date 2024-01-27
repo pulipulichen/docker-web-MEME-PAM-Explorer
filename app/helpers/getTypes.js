@@ -8,8 +8,12 @@ module.exports = async function () {
   }
 
   let results = await R.getAll(`SELECT type FROM item GROUP BY type ORDER BY type DESC`)
+  
+  if (results && results.rows) {
+    results = results.rows
+  }
 
-  TYPES = results.rows.map(({type}) => type)
+  TYPES = results.map(({type}) => type)
   // console.log(TYPES)
   return TYPES
 }

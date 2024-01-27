@@ -1,49 +1,14 @@
 version: "3"
 services:
   app:
-    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240127.150704
+    image: pudding/docker-web:docker-web-meme-pam-explorer-app-20240128.000621
     tty: true
     ports:
       - "__EXT_PORT__:80"
-    networks:
-      - __NETWORK__
-    # restart: on-failure
     volumes: 
       - "__SOURCE_INPUT__:/opt/input/"
       - "__SOURCE_APP__:/opt/app/"
     environment:
       - LOCAL_VOLUMN_PATH=/opt/app/
       - CONTAINER_NAME=docker-web-meme-pam-explorer-app
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=db
-    depends_on:
-      - db
-  db:
-    image: postgres:9.4.23
-    tty: true
-    networks:
-      - __NETWORK__
-    # restart: always
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=db
-  db_admin:
-    image: dockage/phppgadmin
-    tty: true
-    ports: # external:internal
-      - "28081:80"
-    networks:
-      - __NETWORK__
-    restart: always
-    environment:
-      - PHP_PG_ADMIN_SERVER_HOST=db
-      - PHP_PG_ADMIN_SERVER_DEFAULT_DB=db
-    depends_on:
-      - db
-
-networks:
-  __NETWORK__:
-    driver: bridge
+    # restart: on-failure

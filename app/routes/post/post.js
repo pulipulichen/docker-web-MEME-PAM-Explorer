@@ -6,6 +6,10 @@ async function getURL(type, item_id) {
     
     let results = await R.getAll(`SELECT url FROM item WHERE type = '${type}' and item_id = '${item_id}'`)
 
+    if (results && results.rows) {
+      results = results.rows
+    }
+    
     return results.rows[0].url
 }
 
