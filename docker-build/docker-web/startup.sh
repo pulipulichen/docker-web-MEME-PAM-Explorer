@@ -84,7 +84,7 @@ url="http://127.0.0.1:${LOCAL_PORT}${HOMEPAGE_URI}"
 
 
 while true; do
-    response=$(curl -s "$url")
+    response=$(curl -L -s "$url")
     #echo "$response"
     if [[ $(echo "$response" | jq -e . 2>/dev/null) ]]; then
         echo "Received JSON, sleeping for 5 seconds..."

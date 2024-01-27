@@ -1,6 +1,8 @@
 <html>
   <head>
     <script type="text/javascript" src="/static/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/semantic-ui/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/semantic-ui/semantic.min.css" />
 
     <link rel="stylesheet/less" type="text/css" href="/static/styles/layout.less" />
     {{#if style}}
@@ -20,64 +22,74 @@
 
     
     <!-- ================= -->
-    <hr />
 
-    <div class="nav">
+    <div class="ui two item menu inverted nav">
       {{#each TYPES}}
-        <div class="item">
+        
         {{#ifCond this ../type}}
-          {{this}}
+          <div class="active blue item">
+            {{this}}
+          </div>
         {{else}}
-          <a href="{{../page}}/{{this}}" class="item">{{this}}</a>  
+          <a href="{{../page}}/{{this}}" class="item">
+            {{this}}
+          </a>  
         {{/ifCond}}
-        </div>
       {{/each}}
     </div>
 
     <!-- ================= -->
-    <hr />
 
-    <div class="subnav">
-      
-      {{#ifCond page "/plot"}}
-        <div class="item active">
-          Plot
-        </div>
-      {{else}}
-        <a href="/plot/{{type}}" class="item">
-          Plot
-        </a>
-      {{/ifCond}}
+    <div class="ui grid">
 
-      {{#ifCond page "/patterns"}}
-        <div class="item active">
-          Patterns
-        </div>
-      {{else}}
-        <a href="/patterns/{{type}}" class="item">
-          Patterns
-        </a>
-      {{/ifCond}}
-      
-      {{#ifCond page "/items"}}
-        <div class="item active">
-          {{ pattern }} Items
-        </div>
-      {{else}}
-        <div class="item disabled">
-          Items
-        </div>
-      {{/ifCond}}
+      <div class="four wide column">
+        <div class="subnav">
+          
+          {{#ifCond page "/plot"}}
+            <div class="item active">
+              Plot
+            </div>
+          {{else}}
+            <a href="/plot/{{type}}" class="item">
+              Plot
+            </a>
+          {{/ifCond}}
 
-      <div class="item disabled">
-        Post
+          {{#ifCond page "/patterns"}}
+            <div class="item active">
+              Patterns
+            </div>
+          {{else}}
+            <a href="/patterns/{{type}}" class="item">
+              Patterns
+            </a>
+          {{/ifCond}}
+          
+          {{#ifCond page "/items"}}
+            <div class="item active">
+              {{ pattern }} Items
+            </div>
+          {{else}}
+            <div class="item disabled">
+              Items
+            </div>
+          {{/ifCond}}
+
+          <div class="item disabled">
+            Post
+          </div>
+        </div>
+
       </div>
+
+      <!-- ================= -->
+      <div class="twelve wide column">
+
+        {{{content}}}
+
+      </div>
+    
     </div>
-
-    <!-- ================= -->
-    <hr />
-
-    {{{content}}}
     
  </body>
 </html>
