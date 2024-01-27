@@ -9,8 +9,8 @@ async function getURL(type, item_id) {
     if (results && results.rows) {
       results = results.rows
     }
-    
-    return results.rows[0].url
+
+    return results[0].url
 }
 
 module.exports = function (server) {
