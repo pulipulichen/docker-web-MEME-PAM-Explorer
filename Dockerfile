@@ -19,7 +19,7 @@ WORKDIR /opt/
 ENV LOCAL_PORT=80
 ENV LOCAL_VOLUMN_PATH=/opt/app/
 ENV WAIT_FOR_SERVICE="echo 'Server is up'"
-ENV STARTUP_COMMAND="nodemon /opt/app/index.js"
+ENV STARTUP_COMMAND="nodemon -L /opt/app/index.js"
 ENV HOMEPAGE_URI=/
 
 # =================================================================
