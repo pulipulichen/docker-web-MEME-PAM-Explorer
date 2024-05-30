@@ -1,4 +1,9 @@
 <div class="post">
-  <a href="{{ url }}" target="_blank" class="link">{{ url }}</a>
-  <iframe src="{{ url }}" frameborder="0"></iframe>
+  {{#if url}}
+    <a href="{{ url }}" target="_blank" class="link">{{ url }}</a>
+    <iframe src="{{ url }}" frameborder="0"></iframe>
+  {{else}}
+    <p>URL is invalid.</p>
+    <img src="/input/{{ image }}" />
+  {{/if}}
 </div>

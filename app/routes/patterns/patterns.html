@@ -8,14 +8,21 @@
 
   {{#each datasets}}
     <div class="pattern">
-      <a href="/items/{{../type}}/{{this.pattern}}">
-        <h2>{{this.pattern}}</h2>
-      </a>
-      {{#each this.items}}
-        <a href="/post/{{../../type}}/{{this.item_id}}" class="item" target="item_{{ item_id }}">
-          <img src="/input/{{ this.image }}" alt="Item ID: {{this.item_id}}" title="Item ID: {{this.item_id}}" />
+      <h2>
+        <a href="/items/{{../type}}/{{this.pattern}}">
+          {{this.pattern}}
         </a>
-      {{/each}}
+      </h2>
+
+          <div class="ui images">
+          {{#each this.items}}
+            <a href="/post/{{../../type}}/{{this.item_id}}" class="item ui middle aligned image" target="item_{{ item_id }}">
+              <img src="/input/{{ this.image }}" alt="Item ID: {{this.item_id}}" title="Item ID: {{this.item_id}}" />
+            </a>
+          {{/each}}
+          </div>
+          <a class="ui button" href="/items/{{../type}}/{{this.pattern}}">More...</a>
+          
     </div>
   {{/each}}
 </div>

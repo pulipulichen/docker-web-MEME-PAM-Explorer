@@ -1,4 +1,5 @@
 const Hapi = require('@hapi/hapi');
+// const inert = require('@hapi/inert');
 
 const init = async () => {
     await require('./helpers/init')()
@@ -27,6 +28,7 @@ const init = async () => {
 
 process.on('unhandledRejection', (err) => {
     console.log(err);
+    console.log('noooo')
     process.exit(1);
 });
 

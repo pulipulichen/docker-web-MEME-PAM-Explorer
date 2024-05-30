@@ -2,7 +2,7 @@
 # RUN-USING: docker run --name derby-examples --rm derbyjs/derby-examples
 
 # specify base docker image
-FROM node:20.2.0-bullseye
+FROM node:21.2.0-bullseye
 
 # =================================================================
 # For docker web
