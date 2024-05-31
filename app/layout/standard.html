@@ -27,12 +27,13 @@
       {{#each TYPES}}
         
         {{#ifCond this ../type}}
-          <div class="active red item">
-            {{this}}
+        <!-- 20240327-1834 修改名稱 -->
+          <div class="active pink item">
+            視覺模式
           </div>
         {{else}}
           <a href="{{../page}}/{{this}}" class="item">
-            {{this}}
+              語意模式
           </a>  
         {{/ifCond}}
       {{/each}}
@@ -45,39 +46,39 @@
       <div class="four wide column">
         <!-- 20240221 1548 修改註解 -->
         <div class="ui vertical fluid tabular menu">
-                  
+         <!-- 20240327-1840 修改名稱 -->         
           {{#ifCond page "/plot"}}
             <div class="item active">
-              Plot
+              分群結果頁面
             </div>
           {{else}}
             <a href="/plot/{{type}}" class="item">
-              Plot
+              分群結果頁面
             </a>
           {{/ifCond}}
 
           {{#ifCond page "/patterns"}}
             <div class="item active">
-              Patterns
+              模式列表頁面
             </div>
           {{else}}
             <a href="/patterns/{{type}}" class="item">
-              Patterns
+              模式列表頁面
             </a>
           {{/ifCond}}
           
           {{#ifCond page "/items"}}
             <div class="item active">
-              {{ pattern }} Items
+              {{ pattern }} 單一模式頁面
             </div>
           {{else}}
             <div class="item disabled">
-              Items
+              單一模式頁面
             </div>
           {{/ifCond}}
 
           <div class="item disabled">
-            Post
+            原始貼文頁面
           </div>
         </div>
 

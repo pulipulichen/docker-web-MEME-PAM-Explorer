@@ -5,7 +5,7 @@ async function getDatasets (type = 'visual-patterns') {
     let results = await R.getAll(`SELECT pattern, x, y, item_id, centroid_distance, image, url, type FROM item WHERE type = '${type}' ORDER BY centroid_distance DESC`)
 
     let patterns = {}
-    // console.log(items)
+    //console.log(results)
 
     if (results && results.rows) {
       results = results.rows
