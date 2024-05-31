@@ -21,6 +21,12 @@ Chen, Y.-T. (2024). *Docker-web-MEME-PAM-Explorer* (20240531.095418) [Computer s
 
 ----
 
+# How to Use
+
+To modify semantic-patterns.ods and visual-patterns.ods, don't use Microsoft Excel. **Use LibreOffice Calc!**
+
+https://zh-tw.libreoffice.org/download/libreoffice-still/
+
 # Draft
 
 Colab: https://colab.research.google.com/drive/10BZ3HkLiZU0AJh9B-4xiQ-gZEhlVemo2?usp=sharing
