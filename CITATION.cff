@@ -9,3 +9,6 @@ title: "docker-web-MEME-PAM-Explorer"
 license: "MIT"
 repository-code: "https://github.com/pulipulichen/docker-web-MEME-PAM-Explorer"
 abstract: "A Node.js server application deployed using Docker, designed to present data from docker-app-MEME-PAM-Analyzer. Users can easily browse meme analysis results."
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.11398529
