@@ -1,7 +1,13 @@
 <div class="post">
   {{#if url}}
     <a href="{{ url }}" target="_blank" class="link">{{ url }}</a>
-    <iframe src="{{ url }}" frameborder="0"></iframe>
+    
+    {{#if isTwitter}}
+      <iframe border="0" frameborder="0" height="250" width="550"
+        src="https://twitframe.com/show?url={{ encodedURL }}"></iframe>
+    {{else}}
+      <iframe src="{{ url }}" frameborder="0"></iframe>
+    {{/if}}
   {{else}}
     <p>URL is invalid.</p>
     <img src="/input/{{ image }}" />

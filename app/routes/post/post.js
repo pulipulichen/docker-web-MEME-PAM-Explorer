@@ -28,6 +28,11 @@ module.exports = function (server) {
       let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request, name)
       let data = await getURL(layoutVariables.type, request.params.item_id) 
       let item_id = request.params.item_id
+
+      let url =  data.url
+      let encodedURL = encodeURI(url)
+      let isTwitter = url.startsWith('https://twitter.com')
+      // https://twitter.com/Garde_Y2E/status/1638748614091501568
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
         page: '/' + name,
@@ -35,7 +40,9 @@ module.exports = function (server) {
  
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
         style: name,
-        url: data.url,
+        url,
+        encodedURL,
+        isTwitter,
         image: data.image
       }, { layout: 'popup' })
     }
