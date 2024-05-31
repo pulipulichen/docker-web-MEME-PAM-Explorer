@@ -1,7 +1,7 @@
 {
   "name": "docker-web-MEME-PAM-Explorer",
   "version": "1.0.1",
-  "description": "",
+  "description": "A Node.js server application deployed using Docker, designed to present data from docker-app-MEME-PAM-Analyzer. Users can easily browse meme analysis results.",
   "main": "index.js",
   "scripts": {
     "start": "docker-compose down;docker-compose up --build",
@@ -11,21 +11,30 @@
     "d0.build": "docker-compose build",
     "d1.bash": "docker-compose run --service-ports app bash /console.sh",
     "save-conf": "bash ./docker-build/save-conf.sh",
-    "remove-containers": "docker rm $(docker ps -a --filter \"name=docker-web-meme-pam-explorer-\" -q)"
+    "remove-containers": "docker rm $(docker ps -a --filter \"name=docker-web-meme-pam-explorer-\" -q)",
+    "tag": "./build/tag.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://pulipuli.chen@gmail.com@github.com/pulipulichen/docker-web-MEME-PAM-Explorer.git"
   },
   "keywords": [
-    "PWA"
+    "Docker",
+    "Node.js",
+    "Semantic UI"
   ],
-  "author": "Pulipuli Chen",
+  "author": {
+    "name": "Yung-Ting Chen",
+    "email": "blog@pulipuli.info",
+    "orcid": "https://orcid.org/0000-0003-3751-610X",
+    "url": "https://blog.pulipuli.info"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pulipulichen/docker-web-MEME-PAM-Explorer/issues"
   },
   "homepage": "https://github.com/pulipulichen/docker-web-MEME-PAM-Explorer#readme",
+  "doi": "10.5281/zenodo.11398529",
   "dependencies": {
     "@hapi/hapi": "21.3.2",
     "@hapi/vision": "7.0.3",

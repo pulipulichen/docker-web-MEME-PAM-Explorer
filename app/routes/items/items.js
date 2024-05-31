@@ -21,10 +21,12 @@ module.exports = function (server) {
     path: `/${name}/{type}/{pattern}`,
     handler: async (request, h) => {
       let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request, name)
+      let type = request.params.type
       let pattern = request.params.pattern
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
-        page: '/' + name,
+        page: '/patterns',
+        title: `${type} ${pattern}`,
 
         patterns: await require('./../../helpers/getPatterns')(layoutVariables.type),
         pattern,

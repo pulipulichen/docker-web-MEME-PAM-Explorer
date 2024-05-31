@@ -7,15 +7,35 @@ const R = require('./db')
 
 // Specify the input directory where your *.ods files are located
 const inputDirectory = '/opt/input'; // Change this to your input directory path
+// let item_id_counter = 0
 
 // Function to read an ODS file and convert it to a JSON array
 async function readODSFile(filePath) {
   const workbook = XLSX.readFile(filePath);
+  const tableName = getFilenameWithoutExtension(filePath);
   const sheetName = workbook.SheetNames[0]; // Assuming you want to read the first sheet
 
   const worksheet = workbook.Sheets[sheetName];
   const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
+  for (let i = 0 ; i < jsonData.length; i++) {
+    let image = jsonData[i].image
+    if (image.startsWith('input/')) {
+      jsonData[i].image = image.slice(image.indexOf('input/') + 6)
+    }
+
+    let url = jsonData[i].url
+    try {
+      new URL(url)
+    }
+    catch (e) {
+      jsonData[i].url = false
+    }
+    
+    jsonData[i].item_id = `${tableName}-${i}`
+    // item_id_counter++
+  }
+  // console.log(jsonData)
   return jsonData;
 }
 
@@ -55,12 +75,14 @@ async function batchImportData(tableName, jsonDataArray) {
         item.type = tableName
       }
       let id = await R.store(item);
+      // item.item_id = id
+      // await R.store(item);
       // console.log({id})
     }
 
     // Commit the transaction
     // R.commit();
-    console.log('Data imported successfully');
+    console.log(`Data imported successfully: ${tableName}`);
   } catch (error) {
     // Rollback the transaction in case of an error 
     R.rollback();
@@ -70,6 +92,7 @@ async function batchImportData(tableName, jsonDataArray) {
 
 // Function to process all *.ods files in the input directory
 async function processODSFiles() {
+  item_id_counter = 0
   try {
     const odsFiles = fs.readdirSync(inputDirectory).filter((file) => file.endsWith('.ods'));
 

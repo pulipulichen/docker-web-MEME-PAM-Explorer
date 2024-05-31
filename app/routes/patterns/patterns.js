@@ -15,7 +15,7 @@ async function getDatasets(type = 'visual-patterns') {
           results = results.rows
         }
 
-        datasets.push({
+        datasets.push({ 
           pattern,
           items: results
         })
@@ -32,9 +32,11 @@ module.exports = function (server) {
     path: `/${name}/{type?}`,
     handler: async (request, h) => {
       let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request, name)
+      let {type} = request.params
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
         page: '/' + name,
+        title: `${type} ${name}`,
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
         style: name,
