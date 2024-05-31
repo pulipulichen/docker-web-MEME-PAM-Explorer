@@ -36,6 +36,8 @@ module.exports = function (server) {
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
         page: '/' + name,
+        mode_switcher_page: '/' + name,
+
         title: `${type} ${name}`,
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
