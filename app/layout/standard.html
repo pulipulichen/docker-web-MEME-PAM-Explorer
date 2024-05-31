@@ -10,7 +10,7 @@
     {{/if}}
     <script src="/static/styles/less.env.js" type="text/javascript"></script>
     <script src="/static/styles/less.min.js" type="text/javascript"></script>
-
+    
     <title>{{ title }}</title>
   </head>
   <body>
@@ -23,19 +23,18 @@
     </a>
 
     
-    <!-- ================= -->
-
-    <div class="ui two item menu inverted nav">
+    <!-- ================= -->   
+    <div class="ui two item menu" style="background-color: lightskyblue;" >
       {{#each TYPES}}
         
         {{#ifCond this ../type}}
-        <!-- 20240327-1834 修改名稱 -->
-          <div class="active pink item">
-            視覺模式
-          </div>
+        
+          <a class="item">
+            <b>{{this}}</b>
+          </a>
         {{else}}
-          <a href="{{../page}}/{{this}}" class="item">
-              語意模式
+          <a href="{{../page}}/{{this}}" class="item active">
+            <b>{{this}}</b>
           </a>  
         {{/ifCond}}
       {{/each}}
@@ -87,11 +86,14 @@
       </div>
 
       <!-- ================= -->
-      <div class="twelve wide column">
-
-        {{{content}}}
-
-      </div>
+      
+        
+        <div class="twelve wide column">
+          
+            {{{content}}}
+         
+        </div>
+      
     
     </div>
     
