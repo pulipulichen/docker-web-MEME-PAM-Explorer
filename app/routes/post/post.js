@@ -31,6 +31,8 @@ module.exports = function (server) {
 
       let url =  data.url
       let encodedURL = encodeURI(url)
+      let isTwitter = url.startsWith('https://twitter.com')
+      // https://twitter.com/Garde_Y2E/status/1638748614091501568
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
         page: '/' + name,
@@ -40,6 +42,7 @@ module.exports = function (server) {
         style: name,
         url,
         encodedURL,
+        isTwitter,
         image: data.image
       }, { layout: 'popup' })
     }
