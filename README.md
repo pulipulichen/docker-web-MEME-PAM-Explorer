@@ -17,7 +17,9 @@ A Node.js server application deployed using Docker, designed to present data fro
 
 # Citaition
 
-@TODO
+Chen, Y.-T. (2024). *Docker-web-MEME-PAM-Explorer* (20240531.095418) [Computer software]. Zenodo. [https://doi.org/10.5281/ZENODO.11398529](https://doi.org/10.5281/ZENODO.11398529)
+
+----
 
 # Draft
 
