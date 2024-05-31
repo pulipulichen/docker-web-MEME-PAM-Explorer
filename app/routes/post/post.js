@@ -28,6 +28,9 @@ module.exports = function (server) {
       let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request, name)
       let data = await getURL(layoutVariables.type, request.params.item_id) 
       let item_id = request.params.item_id
+
+      let url =  data.url
+      let encodedURL = encodeURI(url)
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
         page: '/' + name,
@@ -35,7 +38,8 @@ module.exports = function (server) {
  
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
         style: name,
-        url: data.url,
+        url,
+        encodedURL,
         image: data.image
       }, { layout: 'popup' })
     }
