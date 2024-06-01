@@ -10,10 +10,10 @@ A Node.js server application deployed using Docker, designed to present data fro
 
 # Key techniques
 
-- Docker: 提供容器化部署，確保應用程式的可移植性和管理便利性。
-- Node.js: 用於構建網頁的伺服器和處理後端邏輯。
-- HAPI.js: Node.js的Web應用框架，用於建立伺服器端API和路由。
-- Semantic UI: 用於前端的資料展示和互動設計。
+- **Docker**: 提供容器化部署，確保應用程式的可移植性和管理便利性。
+- **Node.js**: 用於構建網頁的伺服器和處理後端邏輯。
+- **HAPI.js**: Node.js的Web應用框架，用於建立伺服器端API和路由。
+- **Semantic UI**: 用於前端的資料展示和互動設計。
 
 # Citaition
 
