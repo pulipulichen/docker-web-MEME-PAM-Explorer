@@ -54,6 +54,8 @@ module.exports = function (server) {
       let values = {  
         ...layoutVariables,
         page: '/' + name,
+        mode_switcher_page: '/' + name,
+
         title: `${type} ${name}`,
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',

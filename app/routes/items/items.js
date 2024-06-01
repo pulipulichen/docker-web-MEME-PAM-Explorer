@@ -25,7 +25,10 @@ module.exports = function (server) {
       let pattern = request.params.pattern
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
-        page: '/patterns',
+        // page: '/patterns',
+        page: `/${name}`,
+        mode_switcher_page: `/patterns`,
+
         title: `${type} ${pattern}`,
 
         patterns: await require('./../../helpers/getPatterns')(layoutVariables.type),
