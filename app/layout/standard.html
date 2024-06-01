@@ -25,19 +25,24 @@
     
     <!-- ================= -->   
     <div class="ui two item menu" style="background-color: lightskyblue;" >
-      {{#each TYPES}}
-        
-        {{#ifCond this ../type}}
-        
-          <a class="item">
-            <b>{{this}}</b>
-          </a>
-        {{else}}
-          <a href="{{../page}}/{{this}}" class="item active">
-            <b>{{this}}</b>
-          </a>  
-        {{/ifCond}}
-      {{/each}}
+      {{#ifCond 'visual-patterns' type}}
+        <span class="item active">
+          <b>視覺模式</b>
+        </span>
+      {{else}}
+        <a class="item" href="{{page}}/visual-patterns">
+          <b>視覺模式</b>
+        </a>
+      {{/ifCond}}
+
+      <!-- ==========================  -->
+
+      <a class="item">
+        <b>語義模式</b>
+      </a>
+
+      <!-- ==========================  -->
+      
     </div>
 
     <!-- ================= -->
