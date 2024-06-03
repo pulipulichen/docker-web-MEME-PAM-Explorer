@@ -30,6 +30,14 @@ module.exports = function (server) {
       let pattern = request.params.pattern
       let patternNumber = parsePatternNumber(pattern)
 
+      let count_pattern = 0
+      let patterns = await require('./../../helpers/getPatterns')(layoutVariables.type)
+      for (let i = 0; i < patterns.length; i++) {
+        if (patternNumber === patterns[i].number) {
+          count_pattern = patterns[i].count_pattern
+        }
+      }
+
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
         // page: '/patterns',
@@ -38,8 +46,10 @@ module.exports = function (server) {
 
         title: `${type} ${pattern}`,
 
-        patterns: await require('./../../helpers/getPatternNumbers')(layoutVariables.type),
+        patternNumbers: await require('./../../helpers/getPatternNumbers')(layoutVariables.type),
+        patterns: patterns,
         pattern,
+        count_pattern,
         patternNumber,
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',

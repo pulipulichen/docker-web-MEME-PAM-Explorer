@@ -1,12 +1,12 @@
 <div class="pattern-nav ui message">
    {{#each patterns}}
-      {{#ifCond this ../patternNumber}}
+      {{#ifCond this.number ../patternNumber}}
         <div class="ui compact basic active button">
-          <i class="star outline icon"></i>{{ this }}
+          <i class="star outline icon"></i>{{ this.number }} ({{ this.count_pattern }})
         </div>
       {{else}} 
-        <a class="ui compact basic button" href="/items/{{../type}}/Pattern {{this}}">
-          {{ this }}
+        <a class="ui compact basic button" href="/items/{{../type}}/{{this.pattern}}">
+          {{ this.number }} ({{ this.count_pattern }})
         </a>
       {{/ifCond}}
    {{/each}}
@@ -14,7 +14,7 @@
 
 <div class="items">
   <div class="pattern">
-    <h2>{{this.pattern}}</h2>
+    <h2>{{this.pattern}} ({{ this.count_pattern }})</h2>
 
     <div class="ui images">
         {{#each this.items}}

@@ -1,16 +1,19 @@
 <div class="pattern-nav ui message">
   {{#each patterns}}
-  <a class="ui compact basic button" href="/items/{{../type}}/Pattern {{this}}">{{ this }}</a>
+    <!--
+    <a class="ui compact basic button" href="/items/{{../type}}/{{this.pattern}}">{{ this.number }} ({{ this.count_pattern }})</a>
+    -->
+    <a class="ui compact basic button" href="#pattern_{{this.number}}">{{ this.number }} ({{ this.count_pattern }})</a>
   {{/each}}
 </div>
 
 <div class="patterns">
 
   {{#each datasets}}
-    <div class="pattern">
+    <div class="pattern" id="pattern_{{ this.number }}">
       <h2>
         <a href="/items/{{../type}}/{{this.pattern}}">
-          {{this.pattern}}
+          {{this.pattern}} ({{ this.count_pattern }})
         </a>
       </h2>
 

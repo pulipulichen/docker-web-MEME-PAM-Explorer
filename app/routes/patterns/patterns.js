@@ -3,12 +3,12 @@ const R = require('../../helpers/db.js');
 async function getDatasets(type = 'visual-patterns') {
 
     let patterns = await require('./../../helpers/getPatterns')(type)
-
+    
     // let items = await R.getAll('item', 'type = ?', ['visual-patterns'])
     let datasets = []
 
     for (let i = 0; i < patterns.length; i++) {
-        let pattern = patterns[i]
+        let pattern = patterns[i].pattern
         let results = await R.getAll(`SELECT item_id, image FROM item WHERE type = '${type}' and pattern = '${pattern}' ORDER BY centroid_distance ASC LIMIT 10`)
 
         if (results && results.rows) {
@@ -17,7 +17,9 @@ async function getDatasets(type = 'visual-patterns') {
 
         datasets.push({ 
           pattern,
-          items: results
+          items: results,
+          number: patterns[i].number,
+          count_pattern: patterns[i].count_pattern
         })
     }
 
@@ -42,7 +44,8 @@ module.exports = function (server) {
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
         style: name,
-        patterns: await require('./../../helpers/getPatternNumbers')(layoutVariables.type),
+        patternNumbers: await require('./../../helpers/getPatternNumbers')(layoutVariables.type),
+        patterns: await require('./../../helpers/getPatterns')(layoutVariables.type),
         datasets: await getDatasets(layoutVariables.type)
       })
     }

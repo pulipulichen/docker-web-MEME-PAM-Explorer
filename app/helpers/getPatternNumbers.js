@@ -7,7 +7,13 @@ let parsePatternNumber = function (pattern) {
 
 module.exports = async function (type) {
   let patterns = await getPatterns(type)
-  patterns = patterns.map(i => parsePatternNumber(i))
+  patterns = patterns.map(i => {
+    let number = parsePatternNumber(i.pattern)
+
+    let count = i.count_pattern
+
+    return `${number} (${count})`
+  })
 
   return patterns
 }

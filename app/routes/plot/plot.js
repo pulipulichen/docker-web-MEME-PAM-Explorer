@@ -6,10 +6,11 @@ async function getDatasets (type = 'visual-patterns') {
   try {
     // let results = await R.getAll(`SELECT pattern, x, y, item_id, centroid_distance, image, url, type FROM item WHERE type = '${type}' ORDER BY centroid_distance ASC, pattern ASC limit 200`)
     let patterns = await require('./../../helpers/getPatterns')(type)
+    let patternNumbers = await require('./../../helpers/getPatternNumbers')(type)
 
     for (let i = 0; i < patterns.length; i++) {
-        let pattern = patterns[i]
-        let patternNumber = pattern.slice(pattern.indexOf(' ') + 1)
+        let pattern = patterns[i].pattern
+        let patternNumber = patternNumbers[i]
         let results = await R.getAll(`SELECT pattern, pca_x, pca_y, item_id, centroid_distance, image, url, type FROM item WHERE type = '${type}' and pattern = '${pattern}' ORDER BY centroid_distance ASC LIMIT 10`)
 
         if (results && results.rows) {
