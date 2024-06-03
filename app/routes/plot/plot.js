@@ -15,6 +15,16 @@ async function getDatasets (type = 'visual-patterns') {
           results = results.rows
         }
 
+        results = results.map(item => {
+          return {
+            ...item,
+            x: item.pca_x,
+            y: item.pca_y,
+          }
+        })
+
+        console.log(results)
+
         datasets.push({
           label: pattern,
           data: results,
