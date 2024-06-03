@@ -104,7 +104,7 @@ const externalTooltipHandler = (context) => {
       td.style.color = '#FFF';
 
       let {image, pattern, item_id, type} = items[i]
-      let info = `<a href="/post/${type}/${item_id}" target="item_${item_id}">${item_id} (${pattern})</a>`
+      let info = `<a href="/post/${type}/${item_id}" target="item_${item_id}">${pattern}: ${item_id}</a>`
       // const text = document.createTextNode(body);
 
       td.appendChild(span);

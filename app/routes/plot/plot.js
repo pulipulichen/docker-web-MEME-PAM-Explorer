@@ -23,7 +23,7 @@ async function getDatasets (type = 'visual-patterns') {
           }
         })
 
-        console.log(results)
+        // console.log(results)
 
         datasets.push({
           label: pattern,
