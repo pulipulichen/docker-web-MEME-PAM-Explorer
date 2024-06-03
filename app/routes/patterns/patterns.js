@@ -42,7 +42,7 @@ module.exports = function (server) {
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
         style: name,
-        patterns: await require('./../../helpers/getPatterns')(layoutVariables.type),
+        patterns: await require('./../../helpers/getPatternNumbers')(layoutVariables.type),
         datasets: await getDatasets(layoutVariables.type)
       })
     }

@@ -12,7 +12,12 @@ function generateColorPalette(numColors) {
     return colors;
 }
 
-const colorPalette = generateColorPalette(50);
+const colorPalette = generateColorPalette(datasets.length);
+
+datasets = datasets.map((item, i) => {
+    item.backgroundColor = colorPalette[i]
+    return item
+})
 
 const ctx = document.getElementById('scatterChart').getContext('2d');
 const scatterChart = new Chart(ctx, {
@@ -57,7 +62,7 @@ const scatterChart = new Chart(ctx, {
                 },
             },
             colors: {
-              forceOverride: true
+            //   forceOverride: true
             },
             // colorschemes: {
             //     scheme: 'tableau.Tableau20'
@@ -87,7 +92,7 @@ const scatterChart = new Chart(ctx, {
         scales: {
             x: {
                 type: 'linear', // X-axis type
-                position: 'bottom',
+                // position: 'bottom',
             },
             y: {
                 type: 'linear', // Y-axis type

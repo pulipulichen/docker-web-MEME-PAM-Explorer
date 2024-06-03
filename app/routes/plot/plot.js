@@ -9,6 +9,7 @@ async function getDatasets (type = 'visual-patterns') {
 
     for (let i = 0; i < patterns.length; i++) {
         let pattern = patterns[i]
+        let patternNumber = pattern.slice(pattern.indexOf(' ') + 1)
         let results = await R.getAll(`SELECT pattern, pca_x, pca_y, item_id, centroid_distance, image, url, type FROM item WHERE type = '${type}' and pattern = '${pattern}' ORDER BY centroid_distance ASC LIMIT 10`)
 
         if (results && results.rows) {
@@ -16,6 +17,8 @@ async function getDatasets (type = 'visual-patterns') {
         }
 
         results = results.map(item => {
+          // item.pattern = item.pattern.slice(item.pattern.indexOf(' ') + 1)
+
           return {
             ...item,
             x: item.pca_x,
@@ -26,7 +29,7 @@ async function getDatasets (type = 'visual-patterns') {
         // console.log(results)
 
         datasets.push({
-          label: pattern,
+          label: patternNumber,
           data: results,
           pointRadius: 5
         })

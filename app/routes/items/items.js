@@ -13,6 +13,11 @@ async function getItems(type, pattern) {
     return results
 }
 
+let parsePatternNumber = function (pattern) {
+  let patternNumber = pattern.slice(pattern.indexOf(' ') + 1)
+  return patternNumber
+}
+
 module.exports = function (server) {
   let name = 'items'
   
@@ -23,6 +28,8 @@ module.exports = function (server) {
       let layoutVariables = await require('../../helpers/getLayoutVariables.js')(request, name)
       let type = request.params.type
       let pattern = request.params.pattern
+      let patternNumber = parsePatternNumber(pattern)
+
       return h.view(`routes/${name}/${name}`, {  
         ...layoutVariables,
         // page: '/patterns',
@@ -31,8 +38,9 @@ module.exports = function (server) {
 
         title: `${type} ${pattern}`,
 
-        patterns: await require('./../../helpers/getPatterns')(layoutVariables.type),
+        patterns: await require('./../../helpers/getPatternNumbers')(layoutVariables.type),
         pattern,
+        patternNumber,
 
         // style: '<link rel="stylesheet/less" type="text/css" href="static/plot/plot.less" />',
         style: name,

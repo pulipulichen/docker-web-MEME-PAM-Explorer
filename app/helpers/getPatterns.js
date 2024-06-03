@@ -2,6 +2,11 @@ const R = require('./db')
 
 let PATTERNS = {}
 
+let parsePatternNumber = function (pattern) {
+  let patternNumber = pattern.slice(pattern.indexOf(' ') + 1)
+  return patternNumber
+}
+
 module.exports = async function (type = 'visual-patterns') {
   if (PATTERNS[type]) {
     return PATTERNS[type]
@@ -14,6 +19,11 @@ module.exports = async function (type = 'visual-patterns') {
   }
 
   PATTERNS[type] = results.map(({pattern}) => pattern)
+
+  PATTERNS[type].sort((a, b) => {
+    
+    return (parsePatternNumber(a) - parsePatternNumber(b))
+  })
   // console.log(TYPES)
   return PATTERNS[type]
 }
