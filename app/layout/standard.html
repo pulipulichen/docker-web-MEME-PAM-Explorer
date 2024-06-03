@@ -24,23 +24,28 @@
 
     
     <!-- ================= -->   
-    <div class="ui two item menu" style="background-color: lightskyblue;" >
+    <div class="ui two item menu" >
       {{#ifCond 'visual-patterns' type}}
         <span class="item active">
-          <b>視覺模式</b>
+          <i class="star icon"></i><b>視覺模式</b>
         </span>
       {{else}}
-        <a class="item" href="{{page}}/visual-patterns">
+        <a class="item" href="{{mode_switcher_page}}/visual-patterns">
           <b>視覺模式</b>
         </a>
       {{/ifCond}}
 
       <!-- ==========================  -->
+      {{#ifCond 'semantic-patterns' type}}
+        <span class="item active">
+          <i class="star icon"></i><b>語意模式</b>
+        </span>
+      {{else}}
 
-      <a class="item">
-        <b>語義模式</b>
-      </a>
-
+        <a class="item" href="{{mode_switcher_page}}/semantic-patterns">
+          <b>語意模式</b>
+        </a>
+      {{/ifCond}}
       <!-- ==========================  -->
       
     </div>
