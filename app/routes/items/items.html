@@ -1,11 +1,11 @@
-<div class="pattern-nav">
+<div class="pattern-nav ui message">
    {{#each patterns}}
-      {{#ifCond this ../pattern}}
-        <div class="ui compact basic button">
+      {{#ifCond this ../patternNumber}}
+        <div class="ui compact basic active button">
           <i class="star outline icon"></i>{{ this }}
         </div>
-      {{else}}
-        <a class="ui compact basic button" href="/items/{{../type}}/{{this}}">
+      {{else}} 
+        <a class="ui compact basic button" href="/items/{{../type}}/Pattern {{this}}">
           {{ this }}
         </a>
       {{/ifCond}}

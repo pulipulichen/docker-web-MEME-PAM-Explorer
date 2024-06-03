@@ -8,4 +8,5 @@ services:
     volumes: 
       - "./app:/opt/app"
       - "./input:/opt/input"
+      - "./package.json:/package.json"
     # restart: on-failure
