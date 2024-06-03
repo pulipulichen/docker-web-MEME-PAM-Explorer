@@ -4,7 +4,7 @@ async function getItems(type, pattern) {
 
     // let items = await R.getAll('item', 'type = ?', ['visual-patterns'])
     
-    let results = await R.getAll(`SELECT item_id, image FROM item WHERE type = '${type}' and pattern = '${pattern}' ORDER BY centroid_distance DESC`)
+    let results = await R.getAll(`SELECT item_id, image FROM item WHERE type = '${type}' and pattern = '${pattern}' ORDER BY centroid_distance ASC`)
 
     if (results && results.rows) {
       results = results.rows

@@ -4,34 +4,24 @@ async function getDatasets (type = 'visual-patterns') {
   let datasets = []
   // let items = await R.getAll('item', 'type = ?', ['visual-patterns'])
   try {
-    let results = await R.getAll(`SELECT pattern, x, y, item_id, centroid_distance, image, url, type FROM item WHERE type = '${type}' ORDER BY centroid_distance ASC, pattern ASC limit 100`)
+    // let results = await R.getAll(`SELECT pattern, x, y, item_id, centroid_distance, image, url, type FROM item WHERE type = '${type}' ORDER BY centroid_distance ASC, pattern ASC limit 200`)
+    let patterns = await require('./../../helpers/getPatterns')(type)
 
-    let patterns = {}
-    //console.log(results)
+    for (let i = 0; i < patterns.length; i++) {
+        let pattern = patterns[i]
+        let results = await R.getAll(`SELECT pattern, pca_x, pca_y, item_id, centroid_distance, image, url, type FROM item WHERE type = '${type}' and pattern = '${pattern}' ORDER BY centroid_distance ASC LIMIT 10`)
 
-    if (results && results.rows) {
-      results = results.rows
+        if (results && results.rows) {
+          results = results.rows
+        }
+
+        datasets.push({
+          label: pattern,
+          data: results,
+          pointRadius: 5
+        })
     }
 
-    results.forEach(item => {
-      let pattern = item.pattern
-
-      if (!patterns[pattern]) {
-        patterns[pattern] = []
-      }
-      patterns[pattern].push(item)
-    })
-
-    datasets = Object.keys(patterns).map(label => {
-        return {
-            label,
-            data: patterns[label].map(({x, y, item_id, centroid_distance, image, url, pattern, type}) => {
-                return {x, y, item_id, centroid_distance, image, url, pattern, type}
-            }),
-            // backgroundColor: 'blue',
-            pointRadius: 5, 
-        }
-    })
     datasets = JSON.stringify(datasets)
   }
   catch (e) {

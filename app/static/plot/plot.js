@@ -1,4 +1,19 @@
 // Create a scatter plot with Chart.js
+
+function generateColorPalette(numColors) {
+    const colors = [];
+    const hueStep = 360 / numColors;
+
+    for (let i = 0; i < numColors; i++) {
+        const hue = i * hueStep;
+        colors.push(`hsl(${hue}, 70%, 50%)`);
+    }
+
+    return colors;
+}
+
+const colorPalette = generateColorPalette(50);
+
 const ctx = document.getElementById('scatterChart').getContext('2d');
 const scatterChart = new Chart(ctx, {
     type: 'scatter',
@@ -44,6 +59,9 @@ const scatterChart = new Chart(ctx, {
             colors: {
               forceOverride: true
             },
+            // colorschemes: {
+            //     scheme: 'tableau.Tableau20'
+            // },
             // Customize the tooltips
             tooltip: {
               enabled: false,
