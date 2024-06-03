@@ -2,7 +2,7 @@ const Hapi = require('@hapi/hapi');
 // const inert = require('@hapi/inert');
 
 const init = async () => {
-    await require('./helpers/init')()
+    // await require('./helpers/init')()
 
     const server = Hapi.server({port: 80, host: '0.0.0.0'});
 

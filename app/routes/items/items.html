@@ -1,9 +1,13 @@
-<div class="pattern-nav,ui compact menu">
+<div class="pattern-nav; ui compact menu">
    {{#each patterns}}
       {{#ifCond this ../pattern}}
-        <div class="item">{{ this }}</div>
+        <div class="item">
+          <i class="star outline icon"></i>{{ this }}
+        </div>
       {{else}}
-        <a class="item" href="/items/{{../type}}/{{this}}">{{ this }}</a>
+        <a class="item" href="/items/{{../type}}/{{this}}">
+          {{ this }}
+        </a>
       {{/ifCond}}
    {{/each}}
 </div>
