@@ -1,5 +1,6 @@
 <div class="post">
   {{#if url}}
+    <h2>原始貼文</h2>
     <a href="{{ url }}" target="_blank" class="link">{{ url }}</a>
     
     {{#if isTwitter}}
@@ -15,4 +16,5 @@
     <p>URL is invalid.</p>
     <img src="/input/{{ image }}" />
   {{/if}}
+
 </div>
