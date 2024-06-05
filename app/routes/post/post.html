@@ -1,19 +1,33 @@
 <div class="post">
   {{#if url}}
-    <h2>原始貼文</h2>
-    <a href="{{ url }}" target="_blank" class="link">{{ url }}</a>
-    
-    {{#if isTwitter}}
-      <iframe border="1" frameborder="1" height="250" width="550"
-        src="https://twitframe.com/show?url={{ encodedURL }}"></iframe>
-      <hr />
-      <h2>原始圖片</h2>
-        <img src="/input/{{ image }}" />
-    {{else}}
-      <iframe src="{{ url }}" frameborder="0"></iframe>
-    {{/if}}
+    <a href="{{ url }}" target="_blank" 
+      class="link ui fluid positive labeled icon button">
+      <i class="external alternate icon"></i>
+      {{ url }}
+    </a>
+  
+    <div class="ui equal width grid">
+      <div class="row">
+        <div class="column">
+          <h2 class="ui horizontal divider header">原始貼文</h2>
+
+          {{#if isTwitter}}
+            <iframe border="1" frameborder="1" height="250" width="550"
+              src="https://twitframe.com/show?url={{ encodedURL }}"></iframe>
+          {{else}}
+            <iframe src="{{ url }}" frameborder="0"></iframe>
+          {{/if}}
+        </div>
+        <div class="column">
+          <h2 class="ui horizontal divider header">原始圖片</h2>
+          <a href="/input/{{ image }}">
+            <img src="/input/{{ image }}" />
+          </a>
+        </div>
+      </div>
+    </div>
   {{else}}
-    <p>URL is invalid.</p>
+    <h1>URL is invalid.</h1>
     <img src="/input/{{ image }}" />
   {{/if}}
 
